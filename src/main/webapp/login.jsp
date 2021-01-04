@@ -94,7 +94,7 @@
 										type : "POST",
 										data : data,
 										dataType : "json",
-										success : function(results) {
+										success : function(result) {
 													if (result.code == 101) {
 															window
 																	.open(
