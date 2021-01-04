@@ -4,20 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Msg {
-	private int code;  //´¦Àí×´Ì¬´úÂë 101³É¹¦ 102Ê§°Ü
+	private int code;  //å¤„ç†çŠ¶æ€ä»£ç  101æˆåŠŸ 102å¤±è´¥
 	private String msg;
 	private Map<String,Object> data=new HashMap<String, Object>();
 
 	public static Msg success() {
 		Msg msg=new Msg();
 		msg.setCode(101);
-		msg.setMsg("³É¹¦");
+		msg.setMsg("æˆåŠŸ");
 		return msg;
 	}
 	public static Msg fail() {
 		Msg msg=new Msg();
 		msg.setCode(102);
-		msg.setMsg("Ê§°Ü");
+		msg.setMsg("å¤±è´¥");
 		return msg;
 	}
 	

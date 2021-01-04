@@ -11,7 +11,7 @@
         <result column="entry_time" jdbcType="DATE" property="entryTime"/>
         <result column="department_id" jdbcType="INTEGER" property="departmentId"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
-        <result column="usage" jdbcType="INTEGER" property="usage"/>
+        <result column="usagee" jdbcType="INTEGER" property="usagee"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
     </resultMap>
     <resultMap id="WithDepartBaseResultMap" type="com.nk.entity.Functionary">
@@ -24,7 +24,7 @@
         <result column="entry_time" jdbcType="DATE" property="entryTime"/>
         <result column="department_id" jdbcType="INTEGER" property="departmentId"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
-        <result column="usage" jdbcType="INTEGER" property="usage"/>
+        <result column="usagee" jdbcType="INTEGER" property="usagee"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
         <association property="depart" javaType="com.nk.entity.Department">
             <id column="department_id" property="departmentId"/>
@@ -98,7 +98,7 @@
     <sql id="WithDepart_Column_List">
         f.
         Job_id
-        , f.name, f.sex, f.email, f.phone_num, f.birth, f.entry_time, f.department_id,d.depart_name
+        , f.name, f.sex, f.email, f.phone_num, f.birth, f.entry_time, f.department_id,f.password,d.depart_name
     </sql>
     <select id="selectByExampleWithDepart" resultMap="WithDepartBaseResultMap">
         select
@@ -296,6 +296,15 @@
             <if test="departmentId != null">
                 department_id = #{departmentId,jdbcType=INTEGER},
             </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="usagee != null">
+                usagee = #{usagee,jdbcType=INTEGER},
+            </if>
         </set>
         where Job_id = #{jobId,jdbcType=INTEGER}
     </update>
@@ -307,7 +316,10 @@
             phone_num     = #{phoneNum,jdbcType=VARCHAR},
             birth         = #{birth,jdbcType=DATE},
             entry_time    = #{entryTime,jdbcType=DATE},
-            department_id = #{departmentId,jdbcType=INTEGER}
+            department_id = #{departmentId,jdbcType=INTEGER},
+            password = #{password,jdbcType=VARCHAR},
+            usagee = #{usagee,jdbcType=INTEGER},
+            status = #{usagee,jdbcType=INTEGER},
         where Job_id = #{jobId,jdbcType=INTEGER}
     </update>
 

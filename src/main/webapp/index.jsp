@@ -422,7 +422,7 @@
 								var d_nameTd = $("<td></td>").append(
 										item.depart.departName);
 								var stateTd = $("<td></td>").append(item.status);
-								var usageTd = $("<td></td>").append(item.usage);
+								var usageeTd = $("<td></td>").append(item.usagee);
 								var editBtn = $("<button></button>")
 										.addClass(
 												"btn btn-primary btn-sm edit-btn")
@@ -448,7 +448,7 @@
 										.append(nameTd).append(sexTd).append(
 												emailTd).append(phoneTd)
 										.append(birthTd).append(entryTd)
-										.append(d_nameTd).append(stateTd).append(usageTd).append(editBtnTd)
+										.append(d_nameTd).append(stateTd).append(usageeTd).append(editBtnTd)
 										.append(delBtnTd).appendTo(
 												"#fun_table tbody");
 								var trnum = $("#fun_table tbody").children("tr");

@@ -59,4 +59,8 @@ public class FunctionaryService {
 	public Functionary login(Integer jobId, String password) {
 		return functionaryMapper.login(jobId, password);
 	}
+
+	public void updateByPrimaryKey(Functionary functionary) {
+		functionaryMapper.updateByPrimaryKeySelective(functionary);
+	}
 }

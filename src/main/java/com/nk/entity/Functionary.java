@@ -29,13 +29,13 @@ public class Functionary {
 
     private Integer status;
 
-    private Integer usage;
+    private Integer usagee;
 
     private String password;
 
     {
         status = 1;
-        usage = 1;
+        usagee = 1;
     }
 	@Override
 	public String toString() {

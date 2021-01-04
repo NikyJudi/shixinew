@@ -59,7 +59,7 @@ public class FunctionaryHandler {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/funcc/{jobId}",method=RequestMethod.GET)
+	@GetMapping(value="/funs/{jobId}")
 	public Msg getFun(@PathVariable("jobId") Integer id) {
 		Functionary functionary=functionaryService.getFunctionary(id);
 		return Msg.success().add("functionary", functionary);
@@ -92,7 +92,12 @@ public class FunctionaryHandler {
 			return Msg.fail().add("errors", e.getMessage());
 		}
 	}
-	
+
+	/**
+	 *
+	 * @param functionary
+	 * @return
+	 */
 	@ResponseBody
 	@PostMapping("/func")
 	public Msg save(@Valid @RequestBody Functionary functionary) {
