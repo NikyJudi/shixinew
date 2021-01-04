@@ -6,38 +6,64 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'index.jsp' starting page</title>
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
+<head>
+<base href="<%=basePath%>">
+
+<title>My JSP 'index.jsp' starting page</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<style type="text/css">
-		span{color:red;}
-	</style>
-	<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
-  </head>
-  
-  <body>
-  <span style="color:red;">${registDefeat}</span>
-  <form action="${pageContext.request.contextPath}/user/regist" method="post">
-    	用户名称:<input name="username" id="username" onblur="ajaxSubmit()"><span id="state">${loginError}</span><br>
-    	用户密码:<input type="password" name="password"><br>
-    	用户性别:男<input type="radio" value="男" checked name="sex">
-    		      女<input type="radio" value="女" name="sex"><br>
-    	<input type="submit" id="submit" value="注册">&nbsp;&nbsp;&nbsp;
-    	<input type="reset" value="取消">
-  </form>
-  	已有账号？<a href="user/login_page">登录</a>
-  </body>
-  
-  <script type="text/javascript">
+<style type="text/css">
+span {
+	color: red;
+}
+</style>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+<style type="text/css">
+#login_k {
+	height: 200px;
+	width: 350px;
+	margin: auto;
+	margin-top: 150px;
+	border: 3px black solid;
+	text-align: center;
+	padding-top: 35px;
+	border-radius: 5px;
+	background: pink;
+}
+
+#subtn, #rebtn {
+	width: 45px;
+	height: 25px;
+	border-radius: 2px;
+	border: 1px black solid;
+}
+</style>
+</head>
+
+<body>
+	<span style="color: red;">${registDefeat}</span>
+	<div id="login_k">
+		<form action="${pageContext.request.contextPath}/user/regist"
+			method="post">
+			用户名称:<input name="username" id="username" onblur="ajaxSubmit()">
+			<span id="state">${loginError}</span><br />
+			<br /> 用户密码:<input type="password" name="password"><br />
+			<br /> 用户性别:&nbsp;男<input type="radio" value="男" checked name="sex">
+			女<input type="radio" value="女" name="sex"><br />
+			<br /> <input type="submit" id="subtn" value="注册">&nbsp;&nbsp;&nbsp;
+			<input type="reset" id="rebtn" value="取消">
+		</form>
+		已有账号？<a href="user/login_page">登录</a>
+	</div>
+</body>
+
+<script type="text/javascript">
   /* 原生ajax */
   /*
   		function ajaxSubmit(){
@@ -83,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   }
  */
  /* JQuery.ajax*/
-/*  
+ /*
 $.ajax({
    type: "POST",
    url: "some.php",
@@ -111,7 +137,7 @@ $.ajax({
    		//成功回调函数
    		success: function(msg){//msg--回传的数据
    			if(msg=="no"){
-				$("#state").html("<font color='red'>用户名已存在啊啊</font>"); 
+				$("#state").html("<font color='red'>用户名已存在</font>"); 
 				$("#submit").prop("disabled", true);    		
    			}else{
    				$("#state").html("<font color='green'>√</font>"); 
