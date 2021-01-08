@@ -23,7 +23,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
 
 @Controller

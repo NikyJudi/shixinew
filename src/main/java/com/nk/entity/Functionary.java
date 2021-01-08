@@ -37,13 +37,22 @@ public class Functionary {
         status = 1;
         usagee = 1;
     }
-	@Override
-	public String toString() {
-		return "Functionary [jobId=" + jobId + ", name=" + name + ", sex=" + sex + ", email=" + email
-				+ ", phoneNum=" + phoneNum + ", birth=" + birth + ", entryTime=" + entryTime + ", departmentId="
-				+ departmentId + "]";
-	}
 
-    
-    
+    @Override
+    public String toString() {
+        return "Functionary{" +
+                "jobId=" + jobId +
+                ", name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNum='" + phoneNum + '\'' +
+                ", birth=" + birth +
+                ", entryTime=" + entryTime +
+                ", departmentId=" + departmentId +
+                ", depart=" + depart +
+                ", status=" + status +
+                ", usagee=" + usagee +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }
