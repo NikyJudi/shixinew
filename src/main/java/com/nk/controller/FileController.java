@@ -13,8 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.github.pagehelper.PageInfo;
+import com.nk.entity.Functionary;
 import com.nk.entity.Myfile;
 import com.nk.service.MyFileService;
+import com.nk.util.BucketObjectUtil;
 import com.nk.util.Msg;
 import com.nk.util.Rename_String;
 import org.apache.log4j.Logger;
@@ -76,18 +79,35 @@ public class FileController {
         os.close();
         fis.close();
     }
+//
+//    /**
+//     * 获取某用户的文件
+//     *
+//     * @param id
+//     * @return
+//     */
+//    @GetMapping("/{id}")
+//    public Msg getFile(@PathVariable("id") Integer id) {
+//        List<Myfile> myfiles = myFileService.selectAll();
+//        if (Objects.nonNull(myfiles)) {
+//            PageInfo<Myfile> pageInfo = new PageInfo<>(myfiles, 5);
+//            return Msg.success().add("myfiles", pageInfo);
+//        }
+//        return Msg.success().add("myfiles", "列表为空");
+//    }
 
     /**
      * 获取某用户的文件
      *
-     * @param id
+     * @param
      * @return
      */
-    @GetMapping("/{id}")
-    public Msg getFile(@PathVariable("id") Integer id) {
+    @GetMapping
+    public Msg getFile() {
         List<Myfile> myfiles = myFileService.selectAll();
         if (Objects.nonNull(myfiles)) {
-            return Msg.success().add("myfiles", myfiles);
+            PageInfo<Myfile> pageInfo = new PageInfo<>(myfiles, 5);
+            return Msg.success().add("myfiles", pageInfo);
         }
         return Msg.success().add("myfiles", "列表为空");
     }
@@ -96,31 +116,35 @@ public class FileController {
     @PostMapping("/{jobid}")
     @ResponseBody
     public Msg upload(@PathVariable("jobid") Integer jobid, HttpServletRequest request,
-                                       @RequestParam("file") MultipartFile mfile) throws Exception {
+                                       @RequestParam("up_file") MultipartFile mfile) throws Exception {
 		if (mfile.isEmpty()) {
 			return Msg.fail().add("message", "请选择文件!");
 		}
+//		String url = "https://nkdetong.obs.cn-east-3.myhuaweicloud.com/test1obj?versionId=null";
         String originalFilename = mfile.getOriginalFilename();
         String filePath  = request.getSession().getServletContext().getRealPath("/images");
 		System.out.println(filePath);
-		File dest = new File(filePath + originalFilename);
+//		File dest = new File(filePath + originalFilename);
         String rename = Rename_String.rename(originalFilename);
         Myfile myfile = new Myfile();
         myfile.setCdate(String.valueOf(System.currentTimeMillis()));
 		try {
-			mfile.transferTo(dest);
-			myfile.setFtype(Files.probeContentType(Paths.get(filePath)));
-
+            BucketObjectUtil objectUtil = new BucketObjectUtil();
+//            url += originalFilename;
+            // 上传
+//			mfile.transferTo(dest);
+//            Integer statusCode =
+            objectUtil.uploadFile(mfile.getInputStream(),originalFilename);
+			myfile.setFtype(mfile.getContentType());
+			myfile.setFsize(mfile.getSize());
+			myfile.setFunid(jobid);
+			myfile.setName(originalFilename);
+            myFileService.insert(myfile);
 			LOG.info("上传成功-{}" + Files.probeContentType(Paths.get(filePath)) );
 			return Msg.success().add("message","上传成功");
 		} catch (IOException e) {
 			LOG.error(e.toString(), e);
 		}
-//        System.out.println(rename + "  -------------");
-//        String target = realPath + "/" + rename;
-//        LOG.info(mfile.getOriginalFilename() + "     新文件");
-//        // String target = realPath + "/" + rename;
-//        mfile.transferTo(new File(target));
         return Msg.fail().add("message", "上传失败!");
     }
 

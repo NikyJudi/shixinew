@@ -40,6 +40,12 @@ public class FunctionaryHandler {
 		LOG.info(functionary);
 		return Msg.success().add("message","登陆成功");
 	}
+
+	@GetMapping("/logout")
+	public Msg logout(HttpSession session) {
+		session.invalidate();
+		return Msg.success();
+	}
 	
 	
 	@ResponseBody
@@ -102,7 +108,7 @@ public class FunctionaryHandler {
 	 */
 	@ResponseBody
 	@PostMapping("/func")
-	public Msg save(@Valid @RequestBody Functionary functionary) {
+	public Msg save(@Valid Functionary functionary) {
 		System.out.println(functionary);
 		try {
 			functionaryService.saveFunctionary(functionary);

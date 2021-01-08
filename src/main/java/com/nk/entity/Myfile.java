@@ -12,7 +12,7 @@ public class Myfile {
 
     private String cdate;
 
-    private Double fsize;
+    private Long fsize;
 
     private String ftype;
 
