@@ -99,15 +99,22 @@
 										success : function(result) {
 											if(jobId == 900){
 												if (result.code == 101) {
-													location.href="index-funm.jsp?"+"jobId="+encodeURI(jobId)+"="+"password="+encodeURI(password);
+													location.href="index-funm.jsp?"+"jobId="+jobId+"="+"password="+password;
 													} else {
 														show_validate_status(
 																"#inputPassword",
 																"error",
 																"密码输入有误，请重新输入。")
 													}
-											}else{
-												window.open("index-fun.jsp","_self");
+											}else if(jobId != 900){
+												if(result.code == 101){
+													window.open("index-fun.jsp","_self");
+												} else {
+													show_validate_status(
+															"#inputPassword",
+															"error",
+															"密码输入有误，请重新输入。")
+												}
 											}
 										}
 								});
