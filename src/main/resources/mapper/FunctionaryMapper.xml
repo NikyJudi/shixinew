@@ -98,7 +98,7 @@
     <sql id="WithDepart_Column_List">
         f.
         Job_id
-        , f.name, f.sex, f.email, f.phone_num, f.birth, f.entry_time, f.department_id,f.password,d.depart_name
+        , f.name, f.sex, f.email, f.phone_num, f.birth, f.entry_time,f.usagee,f.status, f.department_id,f.password,d.depart_name
     </sql>
     <select id="selectByExampleWithDepart" resultMap="WithDepartBaseResultMap">
         select
