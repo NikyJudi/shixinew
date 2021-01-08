@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>经典美图</title>
+<script type="text/javascript" src="static/jquery-3.5.0.min.js"></script>
+<script type="text/javascript" src="static/dist/js/bootstrap.min.js"></script>
+<link href="static/dist/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript"
+	src="https://www.imooc.com/data/jquery-1.8.2.min.js"></script>
+<script type="text/javascript"
+	src="https://www.imooc.com/data/jquery.notesforlightbox.js"></script>
+<link rel="stylesheet" type="text/css" href="lightbox.css" />
+<style type="text/css">
+#d1 {
+	margin-top: -25px;
+}
+
+#divtest .content {
+	padding: 8px 0px;
+	font-size: 13px;
+	background: #FFFAFA;
+}
+
+#divtest .content .divPics ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+#divtest .content .divPics ul li {
+	display: inline;
+}
+
+#divtest .content .divPics ul img {
+	border: 5px solid #444;
+	border-width: 4px;
+	width: 242px;
+	height: 375px;
+	margin-top: 5px;
+}
+
+#divtest .content .divPics ul a:hover img {
+	border: 5px solid #fff;
+	border-width: 8px;
+	color: #fff;
+}
+
+#divtest .content .divPics ul a:hover {
+	color: #fff;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+header {
+	width: 100%;
+	text-align:center;
+	background: url("b6.png");
+	opacity: 0.85;
+	position: relative;
+	margin: auto;
+	height: 168px;
+	position: relative;
+}
+
+h1 {
+	font-family: "微软雅黑";
+	font-weight: bold;
+	font-size: 50px;
+	display: inline-block;
+	margin-top: 55px;
+	color: black;
+}
+
+footer {
+	text-align: center;
+}
+
+#divtest {
+	width: 980px;
+	text-align: center;
+	margin: auto;
+	background: #FFFAFA;
+}
+
+#p1 {
+	margin-left: 230px;
+}
+
+.divPics {
+	text-align: left;
+}
+
+#dd1 {
+	background: #FFFAFA;
+}
+</style>
+</head>
+<body>
+	<div id="dd1">
+		<div id="d1">
+			<header>
+				<h1>Welcome To Flowery World</h1>
+			</header>
+		</div>
+		<br />
+		<p id="p1">
+			<button type="button" class="btn btn-info">
+				<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+				<a href="body.html">Back Home</a>
+			</button>
+		</p>
+
+		<div id="divtest">
+			<h2>
+				经典美图<small>纪念意义的美图</small>
+			</h2>
+			<div class="content">
+				<div class="divPics">
+					<ul>
+						<li id="l1"><a href="x1.jpg" title="p1"> <img
+								src="x1.jpg">
+						</a></li>
+						<li id="l2"><a href="x2.jpg" title="p2"> <img
+								src="x2.jpg">
+						</a></li>
+						<li id="l3"><a href="bbb2.jpg" title="p3"> <img
+								src="bbb2.jpg">
+						</a></li>
+						<li id="l4"><a href="f6.jpg" title="p4"> <img
+								src="f6.jpg">
+						</a></li>
+						<li id="l4"><a href="f5.jpg" title="p5"> <img
+								src="f5.jpg">
+						</a></li>
+						<li id="l4"><a href="f4.png" title="p6"> <img
+								src="f4.png">
+						</a></li>
+						<li id="l4"><a href="f1.png" title="p7"> <img
+								src="f1.png">
+						</a></li>
+						<li id="l4"><a href="f2.png" title="p8"> <img
+								src="f2.png">
+						</a></li>
+						<li id="l4"><a href="f3.png" title="p9"> <img
+								src="f3.png">
+						</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<hr width="60%" />
+		&copy;<a>版权信息： Copyright ? 2020 - 2200 Flowery World. All Rights
+			Reserved.</a>
+	</footer>
+
+	<script type="text/javascript">
+		$(function() {
+			$(".divPics a").lightBox({
+				overlayBgColor : "#666", //图片浏览时的背景色
+				overlayOpacity : 0.5, //背景色的透明度
+				containerResizeSpeed : 600
+			//图片切换时的速度
+			})
+		});
+	</script>
+</body>
+</html>

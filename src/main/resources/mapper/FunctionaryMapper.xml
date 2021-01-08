@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nk.dao.FunctionaryMapper">
+    <resultMap id="BaseResultMap" type="com.nk.entity.Functionary">
+        <id column="Job_id" jdbcType="INTEGER" property="jobId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="phone_num" jdbcType="VARCHAR" property="phoneNum"/>
+        <result column="birth" jdbcType="DATE" property="birth"/>
+        <result column="entry_time" jdbcType="DATE" property="entryTime"/>
+        <result column="department_id" jdbcType="INTEGER" property="departmentId"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="usagee" jdbcType="INTEGER" property="usagee"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+    </resultMap>
+    <resultMap id="WithDepartBaseResultMap" type="com.nk.entity.Functionary">
+        <id column="Job_id" jdbcType="INTEGER" property="jobId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="phone_num" jdbcType="VARCHAR" property="phoneNum"/>
+        <result column="birth" jdbcType="DATE" property="birth"/>
+        <result column="entry_time" jdbcType="DATE" property="entryTime"/>
+        <result column="department_id" jdbcType="INTEGER" property="departmentId"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="usagee" jdbcType="INTEGER" property="usagee"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <association property="depart" javaType="com.nk.entity.Department">
+            <id column="department_id" property="departmentId"/>
+            <result column="depart_name" property="departName"/>
+        </association>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        Job_id
+        , name, sex, email, phone_num, birth, entry_time, department_id
+    </sql>
+    <sql id="WithDepart_Column_List">
+        f.
+        Job_id
+        , f.name, f.sex, f.email, f.phone_num, f.birth, f.entry_time, f.department_id,f.password,d.depart_name
+    </sql>
+    <select id="selectByExampleWithDepart" resultMap="WithDepartBaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="WithDepart_Column_List"/>
+        from functionary f LEFT OUTER JOIN depart d ON f.department_id=d.department_id
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKeyWithDepart" resultMap="WithDepartBaseResultMap">
+        select
+        <include refid="WithDepart_Column_List"/>
+        from functionary f LEFT OUTER JOIN depart d ON f.department_id=d.department_id
+        where Job_id = #{jobId,jdbcType=INTEGER}
+    </select>
+    <select id="selectByExample" parameterType="com.nk.entity.FunctionaryExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from functionary
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from functionary
+        where Job_id = #{jobId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from functionary
+        where Job_id = #{jobId,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.nk.entity.FunctionaryExample">
+        delete from functionary
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.nk.entity.Functionary">
+        insert into functionary (Job_id, name, sex,
+                                 email, phone_num, birth,
+                                 entry_time, department_id)
+        values (#{jobId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
+                #{email,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, #{birth,jdbcType=DATE},
+                #{entryTime,jdbcType=DATE}, #{departmentId,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" useGeneratedKeys="true" keyColumn="Job_id" keyProperty="jobId" parameterType="com.nk.entity.Functionary">
+        insert into functionary
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="jobId != null">
+                Job_id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="phoneNum != null">
+                phone_num,
+            </if>
+            <if test="birth != null">
+                birth,
+            </if>
+            <if test="entryTime != null">
+                entry_time,
+            </if>
+            <if test="departmentId != null">
+                department_id,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="jobId != null">
+                #{jobId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNum != null">
+                #{phoneNum,jdbcType=VARCHAR},
+            </if>
+            <if test="birth != null">
+                #{birth,jdbcType=DATE},
+            </if>
+            <if test="entryTime != null">
+                #{entryTime,jdbcType=DATE},
+            </if>
+            <if test="departmentId != null">
+                #{departmentId,jdbcType=INTEGER},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.nk.entity.FunctionaryExample" resultType="java.lang.Long">
+        select count(*) from functionary
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update functionary
+        <set>
+            <if test="record.jobId != null">
+                Job_id = #{record.jobId,jdbcType=INTEGER},
+            </if>
+            <if test="record.name != null">
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sex != null">
+                sex = #{record.sex,jdbcType=VARCHAR},
+            </if>
+            <if test="record.email != null">
+                email = #{record.email,jdbcType=VARCHAR},
+            </if>
+            <if test="record.phoneNum != null">
+                phone_num = #{record.phoneNum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.birth != null">
+                birth = #{record.birth,jdbcType=DATE},
+            </if>
+            <if test="record.entryTime != null">
+                entry_time = #{record.entryTime,jdbcType=DATE},
+            </if>
+            <if test="record.departmentId != null">
+                department_id = #{record.departmentId,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update functionary
+        set Job_id = #{record.jobId,jdbcType=INTEGER},
+        name = #{record.name,jdbcType=VARCHAR},
+        sex = #{record.sex,jdbcType=VARCHAR},
+        email = #{record.email,jdbcType=VARCHAR},
+        phone_num = #{record.phoneNum,jdbcType=VARCHAR},
+        birth = #{record.birth,jdbcType=DATE},
+        entry_time = #{record.entryTime,jdbcType=DATE},
+        department_id = #{record.departmentId,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.nk.entity.Functionary">
+        update functionary
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNum != null">
+                phone_num = #{phoneNum,jdbcType=VARCHAR},
+            </if>
+            <if test="birth != null">
+                birth = #{birth,jdbcType=DATE},
+            </if>
+            <if test="entryTime != null">
+                entry_time = #{entryTime,jdbcType=DATE},
+            </if>
+            <if test="departmentId != null">
+                department_id = #{departmentId,jdbcType=INTEGER},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="usagee != null">
+                usagee = #{usagee,jdbcType=INTEGER},
+            </if>
+        </set>
+        where Job_id = #{jobId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.nk.entity.Functionary">
+        update functionary
+        set name          = #{name,jdbcType=VARCHAR},
+            sex      = #{sex,jdbcType=VARCHAR},
+            email         = #{email,jdbcType=VARCHAR},
+            phone_num     = #{phoneNum,jdbcType=VARCHAR},
+            birth         = #{birth,jdbcType=DATE},
+            entry_time    = #{entryTime,jdbcType=DATE},
+            department_id = #{departmentId,jdbcType=INTEGER},
+            password = #{password,jdbcType=VARCHAR},
+            usagee = #{usagee,jdbcType=INTEGER},
+            status = #{usagee,jdbcType=INTEGER},
+        where Job_id = #{jobId,jdbcType=INTEGER}
+    </update>
+
+
+    <select id="login" parameterType="com.nk.entity.LoginEntity" resultType="com.nk.entity.Functionary">
+        select * from functionary where Job_id = #{jobId, jdbcType=INTEGER} and password=#{password, jdbcType=VARCHAR}
+    </select>
+</mapper>
