@@ -165,7 +165,7 @@
 										name="sex" id="gender1_input" value="男" checked="checked">
 										男
 									</label> <label class="radio-inline"> <input type="radio"
-										name="position" id="gender2_input" value="女"> 女
+										name="sex" id="gender2_input" value="女"> 女
 									</label>
 								</div>
 							</div>
@@ -310,7 +310,7 @@
 		<p id="p1">
 			<button type="button" class="btn btn-info">
 				<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-				<a href="login.jsp">Back Login</a>
+				<a href="index-funm.jsp">Back</a>
 			</button>
 		</p>
 		<div class="container">
@@ -422,7 +422,7 @@
 								var d_nameTd = $("<td></td>").append(
 										item.depart.departName);
 								var stateTd = $("<td></td>").append(item.status);
-								var usageeTd = $("<td></td>").append(item.usagee);
+								var usageTd = $("<td></td>").append(item.usage);
 								var editBtn = $("<button></button>")
 										.addClass(
 												"btn btn-primary btn-sm edit-btn")
@@ -448,7 +448,7 @@
 										.append(nameTd).append(sexTd).append(
 												emailTd).append(phoneTd)
 										.append(birthTd).append(entryTd)
-										.append(d_nameTd).append(stateTd).append(usageeTd).append(editBtnTd)
+										.append(d_nameTd).append(stateTd).append(usageTd).append(editBtnTd)
 										.append(delBtnTd).appendTo(
 												"#fun_table tbody");
 								var trnum = $("#fun_table tbody").children("tr");

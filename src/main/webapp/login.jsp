@@ -78,7 +78,7 @@
 	</div>
 	<script type="text/javascript">
 		$("#back_btn").click(function() {
-			window.open('body.html', '_self');
+			window.open('homepage.html', '_self');
 		})
 		
 		
@@ -88,26 +88,29 @@
 							var data = {}
 							data["jobId"]=$("#inputId").val();
 						    data["password"]=$("#inputPassword").val();
+						    var jobId=data["jobId"];
+						    var password=data["password"];
 							$
 									.ajax({
-										url : "${pagaContext.request.contextPath} login/",
+										url : "${pagaContext.request.contextPath} login",
 										type : "POST",
 										data : data,
 										dataType : "json",
 										success : function(result) {
-													if (result.code == 101) {
-															window
-																	.open(
-																			'index.jsp',
-																			'_self');
-														} else {
-															show_validate_status(
-																	"#inputPassword",
-																	"error",
-																	"密码输入有误，请重新输入。")
-														}
+											if(jobId == 900){
+												if (result.code == 101) {
+													location.href="index-funm.jsp?"+"jobId="+encodeURI(jobId)+"="+"password="+encodeURI(password);
+													} else {
+														show_validate_status(
+																"#inputPassword",
+																"error",
+																"密码输入有误，请重新输入。")
 													}
-									});
+											}else{
+												window.open("index-fun.jsp","_self");
+											}
+										}
+								});
 						})
 						
 		function show_validate_status(ele, status, msg) {

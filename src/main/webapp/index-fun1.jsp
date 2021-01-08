@@ -18,7 +18,6 @@
 	type="text/css" />
 <style type="text/css">
 .container {
-	width: 980px;
 	margin-top: 15px;
 }
 
@@ -36,25 +35,15 @@
 	font-size: 16px;
 }
 
-#find_btn {
-	border-radius: 10px;
-	background: black;
-	border: 1px solid black;
-	color: pink;
-	box-shadow: 2px 4px 15px pink;
-}
-
 #tabs_1 {
 	width: 980px;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
 }
-
 input {
-	border-radius: 10px;
+	border:0;
 }
-
 .dd1 {
 	background: #FFFAFA;
 	margin-top: -25px;
@@ -62,84 +51,117 @@ input {
 }
 #tabs_2 {
 	width: 980px;
-}
-img{
-	border:5px solid black;
-}
-#add_pic{
-	width: 150px;
-	background: black;
-	color: pink;
-	box-shadow: 2px 4px 15px pink;
-	border-radius: 10px;
-	border:2px solid pink;
-	font-size: 16px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
 }
 #pic_input{
 	box-shadow: 2px 4px 15px black;
 	border-radius: 10px;
-
 }
-
+h2{ 
+	font-family: 'Times New Roman', Times, serif;
+    color:rgb(3, 3, 22);
+    text-shadow: 12px 15px 10px black;
+	font-weight:bolder;
+	font-size: 50px;
+	display: inline-block;
+    margin-top: -10px;
+}
+#back_btn{
+	border-radius: 100px;
+	margin-bottom: -40px;
+	margin-left: -40px;
+}
+#input_pwd1,#input_pwd2{
+	border:1px solid black;
+	border-radius:5px;
+}
+#sub_btn{
+	border-radius:5px;
+	border:1px solid black;
+	height:35px;
+	background:white;
+}
 </style>
 </head>
 <body>
 	<div class="dd1">
-		<p id="p1">
-			<button type="button" class="btn btn-info">
-				<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-				<a href="login-1.jsp">Back Login</a>
-			</button>
-		</p>
 		<div class="container">
 			<!-- title -->
 			<div class="row">
 				<div class="col-md-12">
-					<h2>个人空间</h2>
-					<br />
+				<div class="page-header">
+					<h2>My Zone</h2>
+				         <div>
+          					<button type="button" class="btn btn-default" id="back_btn">
+								<span class="glyphicon glyphicon-off"aria-hidden="true"></span>
+								</button>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div id="tabs">
-				<ul class="nav nav-pills">
-					<li role="presentation" class="active" id="my_1"><a
-						href="#tabs_1">我的信息</a></li>
-					<li role="presentation" id="my_2"><a href="#tabs_2">我的图库</a></li>
+				<ul >
+					<li role="presentation" class="active" id="find_btn"><a href="#tabs_1">我的信息</a></li>
+					<li role="presentation" id="up_pwd"><a href="#tabs_2">修改密码</a></li>
 				</ul>
 				<div id="tabs_1">
 					<form class="form1">
-						<label>工&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号:</label>&nbsp;&nbsp;
-						<input type="text" id="input_id" />&nbsp;&nbsp;&nbsp;&nbsp;
-						<button type="button" id="find_btn" value="查看我的个人信息">查看我的个人信息</button>
-						<br /> <br /> <label>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</label>&nbsp;&nbsp;
-						<input type="text" id="input_name" /> <br /> <label>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</label>&nbsp;&nbsp;
-						<input type="text" id="input_sex" /> <br /> <label>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱:</label>&nbsp;&nbsp;
-						<input type="text" id="input_email" /><br /> <label>联系方式:</label>&nbsp;&nbsp;
-						<input type="text" id="input_phone" /> <br /> <label>出生日期:</label>&nbsp;&nbsp;
-						<input type="text" id="input_birth" /><br /> <label>入职日期:</label>&nbsp;&nbsp;
-						<input type="text" id="input_entry" /><br /> <label>所属部门:</label>&nbsp;&nbsp;
-						<input type="text" id="input_dename" />
+						<label>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</label>&nbsp;&nbsp;
+						<input type="text" id="input_name" /> <br /> <br /> 
+						<label>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</label>&nbsp;&nbsp;
+						<input type="text" id="input_sex" /> <br /> <br /> 
+						<label>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱:</label>&nbsp;&nbsp;
+						<input type="text" id="input_email" /><br /> <br /> 
+						<label>联系方式:</label>&nbsp;&nbsp;
+						<input type="text" id="input_phone" /> <br /> <br /> 
+						<label>出生日期:</label>&nbsp;&nbsp;
+						<input type="text" id="input_birth" /><br /> <br /> 
+						<label>入职日期:</label>&nbsp;&nbsp;
+						<input type="text" id="input_entry" /><br /> <br /> 
 					</form>
 				</div>
 				<div id="tabs_2">
-				<form  class="form2" method="post">
-					<input type="file" name="file" id="pic_input" multiple size="20"/>
-					<br/>
-					<button type="button" id="add_pic" >上传</button>
-					<br/>
-					<div name="result" id="result">
-					<img alt="" src="b1.png">
-					<img alt="" src="b4.png">
-					<img alt="" src="b5.png">
-					<img alt="" src="b6.png">
-					<img alt="" src="b4.png">
-					<img alt="" src="b1.png">
-					</div>
-				</form>
+					<form class="form2" method="post">
+						<label>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</label>&nbsp;&nbsp;
+						<input type="text" id="input_pwd1" /> <br /> <br />
+						<label>重新输入:</label>&nbsp;&nbsp;
+						<input type="text" id="input_pwd2" /> <br /> <br />
+						<button id="sub_btn">确定修改</button>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
+	var loc=location.href;
+	var n1=loc.length;//地址的总长度
+	var n2=loc.indexOf("=");//取得=号的位置
+	var text=decodeURI(loc.substr(n2-5, n1));//从=号后面的内容
+	var text_a=text.split("=");
+	var jobid = text_a[1];
+
+	$("#sub_btn").click(function(){
+		var pwd1 = $("#input_pwd1").val();
+		var pwd2 = $("#input_pwd2").val();
+		var jobId = jobid;
+		if(pwd1 == pwd2){
+			$.ajax({
+				url : "${pagaContext.request.contextPath} admin/",
+				type : "PUT",
+				dataType: "json",
+				data : {"jobId": jobId,"password":pwd1},
+				success : function(result) {
+					alert(pwd1);
+					window.open("login.jsp","_self");
+				}
+			});
+		}else{alert("两次输入密码不一致，请重新输入");}
+	});
+		$("#back_btn").click(function(){
+			history.back();
+		})
 		$("#add_pic").click(function(){
 			var newpic=$("#pic_input").val();
 			$("<img src="+newpic+">").appendTo("#result");
@@ -154,11 +176,12 @@ img{
 				event : "mousedown" //通过鼠标按下事件切换选项卡
 			})
 		});
+
 		$("#find_btn").click(
 				function() {
-					var jobId = $("#input_id").val();
+					var jobId = jobid;
 					$.ajax({
-						url : "${pagaContext.request.contextPath} funs/"
+						url : "${pagaContext.request.contextPath} admin/"
 								+ jobId,
 						type : "GET",
 						success : function(result) {
@@ -174,8 +197,6 @@ img{
 								$("#input_entry").val(
 										new Date(functionary.entryTime)
 												.toLocaleDateString());
-								$("#input_dename").val(
-										[ functionary.departmentId ]);
 							}
 						}
 					});

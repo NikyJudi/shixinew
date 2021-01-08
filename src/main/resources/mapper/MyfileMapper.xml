@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nk.dao.MyfileMapper">
+  <resultMap id="BaseResultMap" type="com.nk.entity.Myfile">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="cdate" jdbcType="VARCHAR" property="cdate" />
+    <result column="fsize" jdbcType="DOUBLE" property="fsize" />
+    <result column="ftype" jdbcType="VARCHAR" property="ftype" />
+    <result column="funid" jdbcType="INTEGER" property="funid" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from myfile
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.nk.entity.Myfile">
+    insert into myfile (id, name, url, 
+      cdate, fsize, ftype, 
+      funid)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{cdate,jdbcType=VARCHAR}, #{fsize,jdbcType=DOUBLE}, #{ftype,jdbcType=VARCHAR}, 
+      #{funid,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.nk.entity.Myfile">
+    update myfile
+    set name = #{name,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      cdate = #{cdate,jdbcType=VARCHAR},
+      fsize = #{fsize,jdbcType=DOUBLE},
+      ftype = #{ftype,jdbcType=VARCHAR},
+      funid = #{funid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, name, url, cdate, fsize, ftype, funid
+    from myfile
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, url, cdate, fsize, ftype, funid
+    from myfile
+  </select>
+</mapper>

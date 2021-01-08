@@ -103,6 +103,9 @@ h1 {
                     <li id="myzone">
                     <a>个人空间</a>
 					</li>
+					<li id="man_btn">
+                    <a>管理系统</a>
+					</li>
                 </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -126,7 +129,15 @@ h1 {
 	var n3 = loc.indexOf("?");
 	var urlnow = loc.substr(0,n3);
 	//console.log(jobid);
+ 
+	$("#man_btn").click(function(){
+		var name = prompt("请输入管理系统密码：","");
+		if(name == 123456){
+			window.open("index.jsp","_self");
+		}
 
+	});
+	
 	$("#name").on('click',function(){
 		var jobId = jobid;
 		$.ajax({

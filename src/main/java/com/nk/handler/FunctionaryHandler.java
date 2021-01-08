@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,11 +31,12 @@ public class FunctionaryHandler {
 	private FunctionaryService functionaryService;
 	@ResponseBody
 	@RequestMapping("/login")
-	public Msg findFun(LoginEntity loginEntity) {
+	public Msg findFun(LoginEntity loginEntity, HttpSession session) {
 		Functionary functionary = functionaryService.login(loginEntity.getJobId(), loginEntity.getPassword());
 		if (functionary == null){
 			return Msg.fail().add("message","账号或密码错误");
 		}
+		session.setAttribute("functionary",functionary);
 		LOG.info(functionary);
 		return Msg.success().add("message","登陆成功");
 	}
