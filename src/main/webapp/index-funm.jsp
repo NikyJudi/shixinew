@@ -119,15 +119,22 @@ h1 {
 	</footer>
 
 	<script type="text/javascript">
-	var loc=location.href;
-	var n1=loc.length;//地址的总长度
-	var n2=loc.indexOf("=");//取得=号的位置
-	var text=decodeURI(loc.substr(n2-5, n1));//从=号后面的内容
-	var text_a=text.split("=");
-	var jobid = text_a[1];
-	var pwd = text_a[3];
-	var n3 = loc.indexOf("?");
-	var urlnow = loc.substr(0,n3);
+        var loc=location.href;
+        var n1=loc.length;//地址的总长度
+        var n2=loc.indexOf("?");//取得=号的位置
+        var text=loc.substr(n2+1, n1);//从=号后面的内容
+        var text_a=text.split("&");
+        var text_b=text_a.splice(1,2);
+        var id=text_a.toString();
+        var n3=id.indexOf("=");
+        var jobid=id.substr(n3+1,id.length);
+        var pwd=text_b.toString();
+        var n4=pwd.indexOf("=");
+        var password=pwd.substr(n4+1,pwd.length);
+        console.log(jobid);
+        console.log(password);
+        var urlnow = loc.substr(0,n2);
+        var jobId = jobid;
 	//console.log(jobid);
  
 	$("#man_btn").click(function(){
