@@ -58,8 +58,16 @@ h1 {
 	margin-left: 90px;
 	margin-bottom: -40px;
 }
-#myzone{
+#up_file{
+    margin-left: 300px;
+    margin-top: -35px;
+    width: 200px;
 }
+#fun_table{
+    width: 800px;
+
+}
+
 </style>
 </head>
 <body>
@@ -90,12 +98,12 @@ h1 {
                 <ul class="nav navbar-nav">
                     <li><a href="#">公共资源池</a></li>
                 </ul>
-                <form class="navbar-form navbar-left">
+                <form class="navbar-form navbar-left" id="form">
                     <div class="form-group">
                     <input type="text" class="form-control" placeholder="查找资源文件……" id="text_file">
                     </div>
                     <button type="submit" class="btn btn-default" id="fi_file">查找</button>
-                    <button type="submit" class="btn btn-default" id="up_file">上传</button>
+                    <input type="file" class="btn btn-default" id="up_file" />
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                 	<li><a href="#">回收站</a></li>
@@ -107,6 +115,26 @@ h1 {
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
             </nav>
+            <div class="container">
+                <!-- data -->
+                <div class="row">
+                    <table class="table table-striped table-hover table-condensed"
+                           id="fun_table">
+                        <thead>
+                        <tr>
+                            <th><input type="checkbox" id="check_All" /></th>
+                            <th>文件名称</th>
+                            <th>上传时间</th>
+                            <th>文件大小</th>
+                            <th>文件类型</th>
+                            <th>上传者</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
         </div>
 	</div>
 	<footer>
@@ -118,14 +146,35 @@ h1 {
 	<script type="text/javascript">
 	var loc=location.href;
 	var n1=loc.length;//地址的总长度
-	var n2=loc.indexOf("=");//取得=号的位置
-	var text=decodeURI(loc.substr(n2-5, n1));//从=号后面的内容
-	var text_a=text.split("=");
-	var jobid = text_a[1];
-	var pwd = text_a[3];
-	var n3 = loc.indexOf("?");
-	var urlnow = loc.substr(0,n3);
-	//console.log(jobid);
+	var n2=loc.indexOf("?");//取得=号的位置
+	var text=loc.substr(n2+1, n1);//从=号后面的内容
+    var text_a=text.split("&");
+    var text_b=text_a.splice(1,2);
+    var id=text_a.toString();
+    var n3=id.indexOf("=");
+    var jobid=id.substr(n3+1,id.length);
+    var pwd=text_b.toString();
+    var n4=pwd.indexOf("=");
+    var password=pwd.substr(n4+1,pwd.length);
+    console.log(jobid);
+    console.log(password);
+	var urlnow = loc.substr(0,n2);
+    var jobId = jobid;
+    $("#up_file").click().change(function () {
+        var file_name ;
+        $.ajax({
+            type: "get",
+            url: "${pagaContext.request.contextPath} file/" + jobId,
+            enctype: "multipart/form-data",
+            data: new FormData($("#form")[0]),
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (msg) {
+                alert("回传的:"+msg);
+            }
+        });
+    });
 
 	$("#name").on('click',function(){
 		var jobId = jobid;
@@ -145,7 +194,7 @@ h1 {
 	        $(this).trigger("click"); 	//调用trigger()方法直接触发click事件
 	    }); 
 	 $("#myzone").click(function(){
-		 location.href="index-fun1.jsp?"+"jobId="+jobid+"="+"password="+pwd;
+		 location.href="index-fun1.jsp?"+"                           jobId="+jobid+"&"+"                              password="+password;
 	 })
     $("#back_btn1").click(function(){
         window.open("login.jsp","_self");

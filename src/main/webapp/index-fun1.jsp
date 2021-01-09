@@ -82,6 +82,7 @@ h2{
 	border:1px solid black;
 	height:35px;
 	background:white;
+	width: 150px;
 }
 </style>
 </head>
@@ -102,10 +103,14 @@ h2{
 				</div>
 			</div>
 			<div id="tabs">
-				<ul >
+				<ul>
+					<li role="presentation" id=""><a href="#tabs_0">空间简介</a></li>
 					<li role="presentation" class="active" id="find_btn"><a href="#tabs_1">我的信息</a></li>
 					<li role="presentation" id="up_pwd"><a href="#tabs_2">修改密码</a></li>
 				</ul>
+				<div id="tabs_0">
+					<h4>在这里，您可以查看您的个人信息以及修改密码。</h4>
+				</div>
 				<div id="tabs_1">
 					<form class="form1">
 						<label>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</label>&nbsp;&nbsp;
@@ -125,39 +130,69 @@ h2{
 				<div id="tabs_2">
 					<form class="form2" method="post">
 						<label>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</label>&nbsp;&nbsp;
-						<input type="text" id="input_pwd1" /> <br /> <br />
+						<input type="password" id="input_pwd1" /> <br /> <br />
 						<label>重新输入:</label>&nbsp;&nbsp;
-						<input type="text" id="input_pwd2" /> <br /> <br />
+						<input type="password" id="input_pwd2" /> <br /> <br />
 						<button id="sub_btn">确定修改</button>
 					</form>
 				</div>
 			</div>
 		</div>
+		<div class="modal fade" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Modal title</h4>
+					</div>
+					<div class="modal-body">
+						<p>One fine body&hellip;</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save changes</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 	</div>
 	<script type="text/javascript">
-	var loc=location.href;
-	var n1=loc.length;//地址的总长度
-	var n2=loc.indexOf("=");//取得=号的位置
-	var text=decodeURI(loc.substr(n2-5, n1));//从=号后面的内容
-	var text_a=text.split("=");
-	var jobid = text_a[1];
-
+		var loc=location.href;
+		var n1=loc.length;//地址的总长度
+		var n2=loc.indexOf("?");//取得=号的位置
+		var text=loc.substr(n2+1, n1);//从=号后面的内容
+		var text_a=text.split("&");
+		var text_b=text_a.splice(1,2);
+		var id=text_a.toString();
+		var n3=id.indexOf("=");
+		var jobid=id.substr(n3+1,id.length);
+		var pwd=text_b.toString();
+		var n4=pwd.indexOf("=");
+		var password=pwd.substr(n4+1,pwd.length);
+		console.log(jobid);
+		console.log(password);
+		var urlnow = loc.substr(0,n2);
+		var jobId = jobid;
 	$("#sub_btn").click(function(){
 		var pwd1 = $("#input_pwd1").val();
 		var pwd2 = $("#input_pwd2").val();
 		var jobId = jobid;
 		if(pwd1 == pwd2){
 			$.ajax({
-				url : "${pagaContext.request.contextPath} admin/",
+				url : "${pagaContext.request.contextPath} funccc/"+jobId,
 				type : "PUT",
 				dataType: "json",
-				data : {"jobId": jobId,"password":pwd1},
+				data : {"password":pwd1},
 				success : function(result) {
-					alert(pwd1);
-					window.open("login.jsp","_self");
+					if(result.code == 101){
+						alert("修改成功，请重新登录！");
+						window.open("login.jsp","_self");
+					}
 				}
 			});
-		}else{alert("两次输入密码不一致，请重新输入");}
+		}else{
+			alert("两次输入密码不一致，请重新输入");
+		}
 	});
 		$("#back_btn").click(function(){
 			history.back();
@@ -181,7 +216,7 @@ h2{
 				function() {
 					var jobId = jobid;
 					$.ajax({
-						url : "${pagaContext.request.contextPath} admin/"
+						url : "${pagaContext.request.contextPath} funs/"
 								+ jobId,
 						type : "GET",
 						success : function(result) {

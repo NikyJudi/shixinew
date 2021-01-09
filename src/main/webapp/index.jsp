@@ -5,43 +5,37 @@
 <head>
 <meta charset="UTF-8">
 <title>花花世界有限公司员工信息</title>
-<script type="text/javascript"
-	src="${pagaContext.request.contextPath}static/jquery-3.5.0.min.js"></script>
-<script type="text/javascript"
-	src="${pagaContext.request.contextPath}static/dist/js/bootstrap.min.js"></script>
-<link
-	href="${pagaContext.request.contextPath}static/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+	<script type="text/javascript"
+			src="${pagaContext.request.contextPath }static/jquery-3.5.0.min.js"></script>
+	<script type="text/javascript"
+			src="${pagaContext.request.contextPath }static/dist/js/bootstrap.min.js"></script>
+	<link
+			href="${pagaContext.request.contextPath }static/dist/css/bootstrap.min.css"
+			rel="stylesheet">
 <style type="text/css">
 .container {
-	width: 980px;
+	width: 1200px;
 	margin-top: 15px;
 }
-
 .table th {
 	font-size: 15.4px;
 	text-align: center;
 }
-
 .table {
 	text-align: center;
 }
-
 #page_nav_area {
 	margin-top: -50px;
 	margin-left: 630px;
 }
-
 #page_page_area {
 	margin-top: 120px;
 }
-
 .dd1 {
 	background: #FFFAFA;
 	margin-top: -25px;
 	height: 700px;
 }
-
 #p1 {
 	margin-left: 230px;
 	padding-top: 50px;
@@ -317,7 +311,6 @@
 			<!-- title -->
 			<div class="row">
 				<div class="col-md-12">
-
 					<h2>所有员工信息</h2>
 				</div>
 			</div>
@@ -357,8 +350,8 @@
 							<th>出生日期</th>
 							<th>入职时间</th>
 							<th>部门名称</th>
-							<th>员工状态</th>
-							<th>云盘使用量</th>
+							<th>员工状态(1:活跃;0:禁用)</th>
+							<th>云盘使用(1:活跃;0:禁用)</th>
 							<th>编辑</th>
 							<th>删除</th>
 						</tr>
@@ -380,6 +373,7 @@
 		var totalPage;
 		var currPage;
 		var listPage;
+		var allPage;
 		$(function() {
 			showPage(1);
 		});
@@ -422,7 +416,7 @@
 								var d_nameTd = $("<td></td>").append(
 										item.depart.departName);
 								var stateTd = $("<td></td>").append(item.status);
-								var usageTd = $("<td></td>").append(item.usage);
+								var usageTd = $("<td></td>").append(item.usagee);
 								var editBtn = $("<button></button>")
 										.addClass(
 												"btn btn-primary btn-sm edit-btn")
@@ -465,6 +459,7 @@
 					"当前第" + result.data.page.pageNum + "页/共"
 							+ result.data.page.pages + "页" + "，员工总数为"
 							+ result.data.page.total);
+			allPage = result.data.page.pages;
 			totalPage = result.data.page.total;
 			currPage = result.data.page.pageNum;
 			listPage = result.data.page.list;
@@ -681,7 +676,7 @@
 						success : function(result) {
 							if (result.code == 101) {
 								$("#funAddModal").modal('hide');
-								showPage(totalPage);
+								showPage(allPage);
 							} else {
 								if (result.data.errors.name != undefined) {
 									show_validate_status("#funName_input",
