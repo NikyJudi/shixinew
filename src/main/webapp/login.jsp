@@ -23,17 +23,15 @@
 .body_in {
 	width: 400px;
 	height: 300px;
-	background: #FFFAFA;
-	border: 13px dashed #2376B7;
+	background: #FFFAFA;	border: 13px dashed #2376B7;
 	border-radius: 15px;
 	box-shadow: 15px 20px 70px black;
 }
-
 .form-group {
 	margin-top: 20px;
 }
 
-#btns {
+#btns{
 	margin-top: 10px;
 }
 </style>
@@ -65,7 +63,7 @@
 					</div>
 				</div>
 				<div class="form-group" id="btns">
-					<div class="col-sm-offset-3">
+					<div class="col-sm-offset-4">
 						<button type="button" class="btn btn-default" id="back_btn">取消</button>
 						&nbsp;&nbsp;&nbsp;
 						<button type="button" class="btn btn-default" id="login_btn">登陆</button>
@@ -80,16 +78,14 @@
 		$("#back_btn").click(function() {
 			window.open('homepage.html', '_self');
 		})
-		
-		
-		$("#login_btn")
-				.click(
+
+		$("#login_btn").click(
 						function() {
 							var data = {}
 							data["jobId"]=$("#inputId").val();
-						    data["password"]=$("#inputPassword").val();
-						    var jobId=data["jobId"];
-						    var password=data["password"];
+							data["password"]=$("#inputPassword").val();
+							var jobId=data["jobId"];
+							var password=data["password"];
 							$
 									.ajax({
 										url : "${pagaContext.request.contextPath} login",
@@ -99,16 +95,16 @@
 										success : function(result) {
 											if(jobId == 900){
 												if (result.code == 101) {
-													location.href="index-funm.jsp?"+"jobId="+jobId+"="+"password="+password;
-													} else {
-														show_validate_status(
-																"#inputPassword",
-																"error",
-																"密码输入有误，请重新输入。")
-													}
+													location.href="index-funm.jsp?"+"                           jobId="+jobId+"&s"+"                          password="+password;
+												} else {
+													show_validate_status(
+															"#inputPassword",
+															"error",
+															"密码输入有误，请重新输入。")
+												}
 											}else if(jobId != 900){
 												if(result.code == 101){
-													window.open("index-fun.jsp","_self");
+													location.href="index-fun.jsp?"+"                            jobId="+jobId+"&"+"                             password="+password;
 												} else {
 													show_validate_status(
 															"#inputPassword",
@@ -117,9 +113,13 @@
 												}
 											}
 										}
-								});
-						})
-						
+									});
+						});
+		$(document).keyup(function(event){
+			if(event.keyCode ==13){
+				$("#login_btn").trigger("click");
+			}
+		});
 		function show_validate_status(ele, status, msg) {
 			$(ele).parent().removeClass("has-error has-success has-warning");
 			if (status == "success") {

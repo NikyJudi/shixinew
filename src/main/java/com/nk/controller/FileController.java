@@ -151,7 +151,7 @@ public class FileController {
 //            fos.close();
 //            is.close();
 //        } else {
-//            Sys
+//
 //        // 下载时文件名会乱码或不显示，进行转码
 //        String downloadFielName = new String(fileName.getBytes("UTF-8"), "iso-8859-1");
 //        // 设置响应的内容类型为流的方式
