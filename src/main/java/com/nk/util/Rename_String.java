@@ -16,5 +16,13 @@ public class Rename_String {
 		String newStr = str.replace("-", "");
 		return newStr.concat(str2);
 	}
+	public static String type(String origin) {
+		StringBuffer sb = new StringBuffer(origin);
+		// 反转
+		String reverseStr = sb.reverse().toString();
+		int indexOf = reverseStr.indexOf(".");
+		String subString = reverseStr.substring(0, indexOf + 1);
+		return new StringBuffer(subString).reverse().toString();
+	}
 
 }

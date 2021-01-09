@@ -6,7 +6,7 @@ import lombok.Data;
 public class Myfile {
     private Long id;
 
-    private String name;
+    private String fname;
 
     private String url;
 
@@ -17,5 +17,7 @@ public class Myfile {
     private String ftype;
 
     private Integer funid;
+
+    private Functionary functionary;
 
 }

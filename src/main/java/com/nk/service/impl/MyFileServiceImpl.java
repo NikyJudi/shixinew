@@ -38,4 +38,9 @@ public class MyFileServiceImpl implements MyFileService {
     public int updateByPrimaryKey(Myfile record) {
         return myfileMapper.updateByPrimaryKey(record);
     }
+
+    @Override
+    public List<Myfile> selectByFunId(Integer id) {
+        return myfileMapper.selectByFunId(id);
+    }
 }

@@ -16,4 +16,6 @@ public interface MyFileService {
     List<Myfile> selectAll();
 
     int updateByPrimaryKey(Myfile record);
+
+    List<Myfile> selectByFunId(Integer id);
 }

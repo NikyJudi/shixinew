@@ -16,4 +16,6 @@ public interface MyfileMapper {
     List<Myfile> selectAll();
 
     int updateByPrimaryKey(Myfile record);
+
+    List<Myfile> selectByFunId(Integer id);
 }
