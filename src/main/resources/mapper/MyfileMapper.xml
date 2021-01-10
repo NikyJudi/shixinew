@@ -56,6 +56,6 @@
     <select id="selectByFunId" resultMap="WithFunResultMap">
       select m.id, m.fname, m.url, m.cdate, m.fsize, m.ftype, f.name
       from myfile m left join functionary f on f.Job_id=m.funid
-        where id = #{id,jdbcType=BIGINT}
+        where m.funid = #{id,jdbcType=BIGINT}
     </select>
 </mapper>

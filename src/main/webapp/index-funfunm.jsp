@@ -1,91 +1,88 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>主页</title>
-<script type="text/javascript" src="static/jquery-3.5.0.min.js"></script>
-<script type="text/javascript" src="static/dist/js/bootstrap.min.js"></script>
-<link href="static/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://www.imooc.com/data/jquery-1.8.2.min.js"
-	type="text/javascript"></script>
-<script src="https://www.imooc.com/data/jquery-ui-1.9.2.min.js"
-	type="text/javascript"></script>
-<link href="https://www.imooc.com/data/jquery-ui.css" rel="stylesheet"
-	type="text/css" />
-<style type="text/css">
-body{
-    background-color:#FFFAFA ;
-}
-footer {
-	text-align: center;
-}
-h1 {
-    font-family: 'Times New Roman', Times, serif;
-    color:rgb(3, 3, 22);
-    text-shadow: 12px 15px 10px black;
-	font-weight:bolder;
-	font-size: 50px;
-	display: inline-block;
-    margin-top: -10px;
-    margin-left: 150px;
-}
-#dd1 {
-	background: #FFFAFA;
-}
-#nav_item{
-    margin: auto;
-    width: 980px;
-}
-#fi_file,#up_file{
-    width: 65px;
-}
-#text_file{
-    width: 220px;
-}
-#name {
-	box-shadow:5px 5px 5px pink;
-	background:#FFFAFA;
-	width:100px;
-	height:30px;
-	border:0;
-}
-#back_btn1{
-	border-radius: 100px;
-	margin-left: 90px;
-	margin-bottom: -40px;
-}
-#up_file{
-    margin-left: 300px;
-    margin-top: -35px;
-    width: 110px;
-}
-#fun_table{
-    width: 980px;
-}
-.table th {
-    font-size: 15.4px;
-    text-align: center;
-}
-.table {
-    text-align: center;
-}
-#man_btn{
-    margin-top: 4px;
-    background: none;
-    border: none;
-    color: black;
-    font-size: 15px;
-}
-</style>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <script type="text/javascript" src="static/jquery-3.5.0.min.js"></script>
+    <script type="text/javascript" src="static/dist/js/bootstrap.min.js"></script>
+    <link href="static/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://www.imooc.com/data/jquery-1.8.2.min.js"
+            type="text/javascript"></script>
+    <script src="https://www.imooc.com/data/jquery-ui-1.9.2.min.js"
+            type="text/javascript"></script>
+    <link href="https://www.imooc.com/data/jquery-ui.css" rel="stylesheet"
+          type="text/css" />
+    <style type="text/css">
+        body{
+            background-color:#FFFAFA ;
+        }
+        footer {
+            text-align: center;
+        }
+        h1 {
+            font-family: 'Times New Roman', Times, serif;
+            color:rgb(3, 3, 22);
+            text-shadow: 12px 15px 10px black;
+            font-weight:bolder;
+            font-size: 50px;
+            display: inline-block;
+            margin-top: -10px;
+            margin-left: 150px;
+        }
+        #dd1 {
+            background: #FFFAFA;
+        }
+        #nav_item{
+            margin: auto;
+            width: 980px;
+        }
+        #fi_file,#up_file{
+            width: 65px;
+        }
+        #text_file{
+            width: 220px;
+        }
+        .table th {
+            font-size: 15.4px;
+            text-align: center;
+        }
+        .table {
+            text-align: center;
+        }
+        #name {
+            box-shadow:5px 5px 5px pink;
+            background:#FFFAFA;
+            width:100px;
+            height:30px;
+            border:0;
+        }
+        #back_btn1{
+            border-radius: 100px;
+            margin-left: 90px;
+            margin-bottom: -40px;
+        }
+        #up_file{
+            margin-left: 300px;
+            margin-top: -35px;
+            width: 200px;
+        }
+        #fun_table{
+            width: 980px;
+        }
+        #page_nav_area{
+            margin-top: -45px;
+            margin-left: 700px;
+        }
+    </style>
 </head>
 <body>
 <div id="dd1">
     <div class="page-header">
-        <h1>Logo-Design Zone <small>Sharing pool</small></h1>
+        <h1>Logo-Design Zone <small>My pool</small></h1>
         <div>
             <button type="button" class="btn btn-default" id="back_btn1">
                 <span class="glyphicon glyphicon-off"aria-hidden="true"></span>
@@ -119,35 +116,9 @@ h1 {
                     </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">回收站</a></li>
-                        <li><a id="myfun">个人资源池</a></li>
+                        <li><a href="#">个人资源池</a></li>
                         <li id="myzone">
                             <a>个人空间</a>
-                        </li>
-                        <li>
-                            <!-- Button trigger modal -->
-                            <button id="man_btn" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                                管理系统
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabel">管理员登录</h4>
-                                        </div>
-                                        <div class="modal-body" style="text-align: center">
-                                            <label>登录密码:</label>
-                                            <input type="password" id="pwd_text"/>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="reset" class="btn btn-default" data-dismiss="modal">取消</button>
-                                            <button type="submit" class="btn btn-primary" id="sub_btn">确认</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -181,24 +152,39 @@ h1 {
             </div>
         </div>
     </div>
-</div>
-	<footer>
-		<hr width="60%" />
-		&copy;<a>版权信息： Copyright ? 2020 - 2200 Flowery World. All Rights
-			Reserved.</a>
-	</footer>
+    <footer>
+        <hr width="60%" />
+        &copy;<a>版权信息： Copyright ? 2020 - 2200 Flowery World. All Rights
+        Reserved.</a>
+    </footer>
 
-	<script type="text/javascript">
+    <script type="text/javascript">
         var totalPage;
         var currPage;
         var listPage;
         var allPage;
+        var loc=location.href;
+        var n1=loc.length;//地址的总长度
+        var n2=loc.indexOf("?");//取得=号的位置
+        var text=loc.substr(n2+1, n1);//从=号后面的内容
+        var text_a=text.split("&");
+        var text_b=text_a.splice(1,2);
+        var id=text_a.toString();
+        var n3=id.indexOf("=");
+        var jobid=id.substr(n3+1,id.length);
+        var pwd=text_b.toString();
+        var n4=pwd.indexOf("=");
+        var password=pwd.substr(n4+1,pwd.length);
+        console.log(jobid);
+        console.log(password);
+        var urlnow = loc.substr(0,n2);
+        var jobId = jobid;
         $(function() {
             showPage(1);
         });
         function showPage(n) {
             $.ajax({
-                url : "${pagaContext.request.contextPath} file",
+                url : "${pagaContext.request.contextPath} file/"+jobId,
                 data : "pn=" + n,
                 type : "GET",
                 success : function(result) {
@@ -211,7 +197,6 @@ h1 {
                 }
             });
         }
-
         function build_fun_table(result) {
             $("#fun_table tbody").empty();
             var fpage = result.data.page.list;
@@ -219,6 +204,7 @@ h1 {
                 .each(
                     fpage,
                     function(index, item) {
+
                         var checkTd = $("<td><input type='checkbox' class='check_item'/></td>");
                         var f_idTd = $("<td></td>").append(item.id);
                         var nameTd = $("<td></td>").append(item.fname);
@@ -269,6 +255,7 @@ h1 {
                             .append(delBtnTd).appendTo(
                             "#fun_table tbody");
                         var trnum = $("#fun_table tbody").children("tr");
+
                     });
         }
         function build_page_info_area(result) {
@@ -338,23 +325,6 @@ h1 {
             $(".check_item").prop("checked", $(this).prop("checked"));
         });
 
-        var loc=location.href;
-        var n1=loc.length;//地址的总长度
-        var n2=loc.indexOf("?");//取得=号的位置
-        var text=loc.substr(n2+1, n1);//从=号后面的内容
-        var text_a=text.split("&");
-        var text_b=text_a.splice(1,2);
-        var id=text_a.toString();
-        var n3=id.indexOf("=");
-        var jobid=id.substr(n3+1,id.length);
-        var pwd=text_b.toString();
-        var n4=pwd.indexOf("=");
-        var password=pwd.substr(n4+1,pwd.length);
-        console.log(jobid);
-        console.log(password);
-        var urlnow = loc.substr(0,n2);
-        var jobId = jobid;
-	//console.log(jobid);
 
         $("#up_file").click().change(function () {
             var file_name ;
@@ -367,51 +337,38 @@ h1 {
                 contentType: false,
                 cache: false,
                 success: function (msg) {
-                    alert("上传成功！");
+                    alert("上传成功");
                     showPage(allPage);
                 }
             });
         });
 
-        $("#sub_btn").click(function () {
-           var manpwd = $("#pwd_text").val();
-           if (manpwd == 123456){
-               location.href="index.jsp?"+"                           jobId="+jobid+"&"+"                              password="+password;
-           }else{
-               alert("输入的密码有错，请重新输入");
-           }
+        $("#name").on('click',function(){
+            var jobId = jobid;
+            $.ajax({
+                url : "${urlnow} funs/"
+                    + jobId,
+                type : "GET",
+                success : function(result) {
+                    if (result.data.functionary != null) {
+                        var functionary = result.data.functionary;
+                        $("#name").val(functionary.name);
+                    }
+                }
+            });
         });
-        $(document).keyup(function(event){
-            if(event.keyCode ==13){
-                $("#sub_btn").trigger("click");
-            }
+        $("#name").mouseover(function(){
+            $(this).trigger("click"); 	//调用trigger()方法直接触发click事件
         });
-	$("#name").on('click',function(){
-		var jobId = jobid;
-		$.ajax({
-			url : "${urlnow} funs/"
-					+ jobId,
-			type : "GET",
-			success : function(result) {
-				if (result.data.functionary != null) {
-					var functionary = result.data.functionary;
-					$("#name").val(functionary.name);
-				}
-			}
-		});
-	});
-	 $("#name").mouseover(function(){
-	        $(this).trigger("click"); 	//调用trigger()方法直接触发click事件
-	    }); 
-	 $("#myzone").click(function(){
-         location.href="index-fun1.jsp?"+"                           jobId="+jobid+"&"+"                              password="+password;
-	 })
-    $("#back_btn1").click(function(){
-        window.open("login.jsp","_self");
-    });
-	 $("#myfun").click(function(){
-            location.href="index-funfunm.jsp?"+"                           jobId="+jobid+"&"+"                              password="+password;
-     });
-	</script>
+        $("#myzone").click(function(){
+            location.href="index-fun1.jsp?"+"                           jobId="+jobid+"&"+"                              password="+password;
+        })
+        $("#back_btn1").click(function(){
+            location.href="index-funm.jsp?"+"                           jobId="+jobid+"&"+"                              password="+password;
+        });
+        $("#allpool").click(function(){
+            location.href="index-fun.jsp?"+"                           jobId="+jobid+"&"+"                              password="+password;
+        });
+    </script>
 </body>
 </html>

@@ -5,7 +5,7 @@
     <groupId>com.nk</groupId>
     <artifactId>keshe</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <properties>
         <webVersion>3.1</webVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

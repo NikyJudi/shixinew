@@ -17,5 +17,5 @@ public interface MyFileService {
 
     int updateByPrimaryKey(Myfile record);
 
-    List<Myfile> selectByFunId(Integer id);
+    List<Myfile> selectByFunId(Long id);
 }

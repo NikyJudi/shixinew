@@ -46,6 +46,13 @@ h1 {
 #text_file{
     width: 220px;
 }
+.table th {
+    font-size: 15.4px;
+    text-align: center;
+}
+.table {
+    text-align: center;
+}
 #name {
 	box-shadow:5px 5px 5px pink;
 	background:#FFFAFA;
@@ -64,10 +71,12 @@ h1 {
     width: 200px;
 }
 #fun_table{
-    width: 800px;
-
+    width: 980px;
 }
-
+#page_nav_area{
+    margin-top: -45px;
+    margin-left: 700px;
+}
 </style>
 </head>
 <body>
@@ -96,18 +105,18 @@ h1 {
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">公共资源池</a></li>
+                    <li><a id="allpool">公共资源池</a></li>
                 </ul>
                 <form class="navbar-form navbar-left" id="form">
                     <div class="form-group">
                     <input type="text" class="form-control" placeholder="查找资源文件……" id="text_file">
                     </div>
                     <button type="submit" class="btn btn-default" id="fi_file">查找</button>
-                    <input type="file" class="btn btn-default" id="up_file" />
+                    <input type="file" class="btn btn-default" id="up_file" name="up_file" />
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                 	<li><a href="#">回收站</a></li>
-                    <li><a href="#">个人资源池</a></li>
+                    <li><a id="myfun">个人资源池</a></li>
                     <li id="myzone">
                     <a>个人空间</a>
 					</li>
@@ -123,9 +132,10 @@ h1 {
                         <thead>
                         <tr>
                             <th><input type="checkbox" id="check_All" /></th>
+                            <th>序号</th>
                             <th>文件名称</th>
                             <th>上传时间</th>
-                            <th>文件大小</th>
+                            <th>文件大小（b）</th>
                             <th>文件类型</th>
                             <th>上传者</th>
                         </tr>
@@ -134,6 +144,11 @@ h1 {
 
                         </tbody>
                     </table>
+                </div>
+                <!-- paging info -->
+                <div class="row">
+                    <div class="col-md-6" id="page_info_area"></div>
+                    <div class="col-md-6 " id="page_nav_area"></div>
                 </div>
         </div>
 	</div>
@@ -144,6 +159,155 @@ h1 {
 	</footer>
 
 	<script type="text/javascript">
+        var totalPage;
+        var currPage;
+        var listPage;
+        var allPage;
+        $(function() {
+            showPage(1);
+        });
+        function showPage(n) {
+            $.ajax({
+                url : "${pagaContext.request.contextPath} file",
+                data : "pn=" + n,
+                type : "GET",
+                success : function(result) {
+                    //显示数据
+                    build_fun_table(result);
+                    //显示分页信息
+                    build_page_info_area(result);
+                    //显示分页页面导航信息
+                    build_page_nav_area(result);
+                }
+            });
+        }
+
+        function build_fun_table(result) {
+            $("#fun_table tbody").empty();
+            var fpage = result.data.page.list;
+            $
+                .each(
+                    fpage,
+                    function(index, item) {
+                        var checkTd = $("<td><input type='checkbox' class='check_item'/></td>");
+                        var f_idTd = $("<td></td>").append(item.id);
+                        var nameTd = $("<td></td>").append(item.fname);
+                        //var urlTd = $("<td></td>").append(item.url);
+                        var dateTd = $("<td></td>").append(
+                            new Date(item.cdate)
+                                .toLocaleDateString());
+                        var sizeTd = $("<td></td>").append(item.fsize);
+                        var typeTd = $("<td></td>").append(item.ftype);
+                        var f_nameTd = $("<td></td>").append(item.functionary.name);
+                        var delBtn = $("<button></button>")
+                            .addClass(
+                                "btn btn-danger btn-sm delete-btn")
+                            .append(
+                                $("<span></span>")
+                                    .addClass(
+                                        "glyphicon glyphicon-trash"))
+                            .append("删除");
+                        delBtn.attr("delete-funid", item.id);
+                        var delBtnTd = $("<td></td>").append(delBtn);
+
+                        var lookBtn = $("<button></button>")
+                            .addClass(
+                                "btn btn-primary btn-sm look-btn")
+                            .append(
+                                $("<span></span>")
+                                    .addClass(
+                                        "glyphicon glyphicon-play-circle"))
+                            .append("预览");
+                        lookBtn.attr("look-funid", item.id);
+                        var lookBtnTd = $("<td></td>").append(lookBtn);
+
+                        var dowBtn = $("<button></button>")
+                            .addClass(
+                                "btn btn-success btn-sm dow-btn")
+                            .append(
+                                $("<span></span>")
+                                    .addClass(
+                                        "glyphicon glyphicon-download-alt"))
+                            .append("下载");
+                        dowBtn.attr("dow-funid", item.id);
+                        var dowBtnTd = $("<td></td>").append(dowBtn);
+
+                        $("<tr></tr>").append(checkTd).append(f_idTd)
+                            .append(nameTd).append(
+                            dateTd).append(sizeTd)
+                            .append(typeTd).append(f_nameTd).append(lookBtnTd).append(dowBtnTd)
+                            .append(delBtnTd).appendTo(
+                            "#fun_table tbody");
+                        var trnum = $("#fun_table tbody").children("tr");
+                    });
+        }
+        function build_page_info_area(result) {
+            $("#page_info_area").empty();
+            $("#page_info_area").append(
+                "当前第" + result.data.page.pageNum + "页/共"
+                + result.data.page.pages + "页" + "，文件总数为"
+                + result.data.page.total);
+            allPage = result.data.page.pages;
+            totalPage = result.data.page.total;
+            currPage = result.data.page.pageNum;
+            listPage = result.data.page.list;
+        }
+        function build_page_nav_area(result) {
+            $("#page_nav_area").empty();
+            var ul = $("<ul></ul>").addClass("pagination");
+            var firstPageLi = $("<li></li>").append(
+                $("<a></a>").append("首页").attr("href", "#"));
+            var previousPageLi = $("<li></li>").append(
+                $("<a></a>").append("&laquo;").attr("href", "#"));
+            if (result.data.page.hasPreviousPage == false) {
+                firstPageLi.addClass("disabled");
+                previousPageLi.addClass("disabled");
+            } else {
+                firstPageLi.click(function() {
+                    showPage(1);
+                });
+                previousPageLi.click(function() {
+                    showPage(result.data.page.pageNum - 1);
+                });
+            }
+            var nextPageLi = $("<li></li>").append(
+                $("<a></a>").append("&raquo;").attr("href", "#"));
+            var lastPageLi = $("<li></li>").append(
+                $("<a></a>").append("尾页").attr("href", "#"));
+
+            if (result.data.page.hasNextPage == false) {
+                nextPageLi.addClass("disabled");
+                lastPageLi.addClass("disabled");
+            } else {
+                nextPageLi.click(function() {
+                    showPage(result.data.page.pageNum + 1);
+                });
+                lastPageLi.click(function() {
+                    showPage(result.data.page.pages);
+                });
+            }
+            ul.append(firstPageLi).append(previousPageLi);
+            $.each(result.data.page.navigatepageNums, function(index, item) {
+                var numLi = $("<li></li>").append(
+                    $("<a></a>").append(item).attr("href", "#"));
+                if (result.data.page.pageNum == item) {
+                    numLi.addClass("active");
+                }
+
+                numLi.click(function() {
+                    showPage(item);
+                });
+                ul.append(numLi);
+            });
+            ul.append(nextPageLi).append(lastPageLi);
+            var navElement = $("<nav></nav>").append(ul).appendTo(
+                "#page_nav_area");
+        }
+        $("#check_All").click(function() {
+            //alert($(this).prop("checked"));
+            $(".check_item").prop("checked", $(this).prop("checked"));
+        });
+
 	var loc=location.href;
 	var n1=loc.length;//地址的总长度
 	var n2=loc.indexOf("?");//取得=号的位置
@@ -163,7 +327,7 @@ h1 {
     $("#up_file").click().change(function () {
         var file_name ;
         $.ajax({
-            type: "get",
+            type: "post",
             url: "${pagaContext.request.contextPath} file/" + jobId,
             enctype: "multipart/form-data",
             data: new FormData($("#form")[0]),
@@ -171,7 +335,8 @@ h1 {
             contentType: false,
             cache: false,
             success: function (msg) {
-                alert("回传的:"+msg);
+                alert("上传成功！");
+                showPage(allPage);
             }
         });
     });
@@ -199,6 +364,12 @@ h1 {
     $("#back_btn1").click(function(){
         window.open("login.jsp","_self");
     });
+	 $("#myfun").click(function(){
+         location.href="index-funfun.jsp?"+"                           jobId="+jobid+"&"+"                              password="+password;
+     });
+	 $("#allpool").click(function(){
+         location.href="index-fun.jsp?"+"                           jobId="+jobid+"&"+"                              password="+password;
+     });
 	</script>
 </body>
 </html>

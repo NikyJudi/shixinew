@@ -19,28 +19,30 @@
 	margin-right: auto;
 	margin-top: 150px;
 }
-
 .body_in {
 	width: 400px;
 	height: 300px;
-	background: #FFFAFA;	border: 13px dashed #2376B7;
+	background: #FFFAFA;
+	border: 13px dashed #2376B7;
 	border-radius: 15px;
 	box-shadow: 15px 20px 70px black;
 }
 .form-group {
 	margin-top: 20px;
 }
-
 #btns{
 	margin-top: 10px;
+}
+#body_inp{
+	margin-top: 35px;
 }
 </style>
 </head>
 <body background="b2.png">
 	<div class="body_x">
 		<form class="form-horizontal">
-			<div class="body_in">
-				<div class="form-group">
+			<div class="body_in" >
+				<div class="form-group" id="body_inp">
 					<label for="inputId" class="col-sm-3 control-label">账号：</label>
 					<div class="col-sm-7">
 						<input type="text" class="form-control" id="inputId"
@@ -95,7 +97,7 @@
 										success : function(result) {
 											if(jobId == 900){
 												if (result.code == 101) {
-													location.href="index-funm.jsp?"+"                           jobId="+jobId+"&s"+"                          password="+password;
+													location.href="index-funm.jsp?"+"                           jobId="+jobId+"&"+"                          password="+password;
 												} else {
 													show_validate_status(
 															"#inputPassword",

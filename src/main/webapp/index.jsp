@@ -14,7 +14,7 @@
 			rel="stylesheet">
 <style type="text/css">
 .container {
-	width: 1200px;
+	width: 1150px;
 	margin-top: 15px;
 }
 .table th {
@@ -25,8 +25,8 @@
 	text-align: center;
 }
 #page_nav_area {
-	margin-top: -50px;
-	margin-left: 630px;
+	margin-top: -45px;
+	margin-left: 700px;
 }
 #page_page_area {
 	margin-top: 120px;
@@ -304,7 +304,7 @@
 		<p id="p1">
 			<button type="button" class="btn btn-info">
 				<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-				<a href="index-funm.jsp">Back</a>
+				<a id="back_pool">Back</a>
 			</button>
 		</p>
 		<div class="container">
@@ -374,6 +374,26 @@
 		var currPage;
 		var listPage;
 		var allPage;
+		var loc=location.href;
+		var n1=loc.length;//地址的总长度
+		var n2=loc.indexOf("?");//取得=号的位置
+		var text=loc.substr(n2+1, n1);//从=号后面的内容
+		var text_a=text.split("&");
+		var text_b=text_a.splice(1,2);
+		var id=text_a.toString();
+		var n3=id.indexOf("=");
+		var jobid=id.substr(n3+1,id.length);
+		var pwd=text_b.toString();
+		var n4=pwd.indexOf("=");
+		var password=pwd.substr(n4+1,pwd.length);
+		console.log(jobid);
+		console.log(password);
+		var urlnow = loc.substr(0,n2);
+		var jobId = jobid;
+
+		$("#back_pool").click(function(){
+			location.href="index-funm.jsp?"+"                           jobId="+jobid+"&"+"                              password="+password;
+		});
 		$(function() {
 			showPage(1);
 		});

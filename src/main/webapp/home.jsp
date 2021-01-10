@@ -61,20 +61,12 @@ span {
 </head>
 <body background="b2.png">
 	<div>
-		<button type="button" class="btn btn-info" id="h1_btn_btn">
-			<a href="home-1.html"><span class="glyphicon glyphicon-star"
-				aria-hidden="true">s-1</a></span>
-		</button>
-		<button type="button" class="btn btn-default" id="h_btn_btn">
-			<a href="home.jsp"><span class="glyphicon glyphicon-star-empty"
-				aria-hidden="true">s-2</a></span>
-		</button>
 		</div>
 		<div class="jumbotron">
 			<p id="p1">Flowery World</p>
-			<p id="p_1">Make You More Beautiful</p>
+			<p id="p_1">Make the best logo design</p>
 			<p>...</p>
-			<br /> <a id="le" class="btn btn-default btn-lg" href="body.html"
+			<br /> <a id="le" class="btn btn-default btn-lg" href="homepage.html"
 				role="button"><span>Learn more</span></a>
 
 		</div>

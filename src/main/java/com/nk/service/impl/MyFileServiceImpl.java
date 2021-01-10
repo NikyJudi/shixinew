@@ -40,7 +40,7 @@ public class MyFileServiceImpl implements MyFileService {
     }
 
     @Override
-    public List<Myfile> selectByFunId(Integer id) {
+    public List<Myfile> selectByFunId(Long id) {
         return myfileMapper.selectByFunId(id);
     }
 }

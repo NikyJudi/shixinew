@@ -21,7 +21,7 @@ public class Rename_String {
 		// 反转
 		String reverseStr = sb.reverse().toString();
 		int indexOf = reverseStr.indexOf(".");
-		String subString = reverseStr.substring(0, indexOf + 1);
+		String subString = reverseStr.substring(0, indexOf);
 		return new StringBuffer(subString).reverse().toString();
 	}
 
