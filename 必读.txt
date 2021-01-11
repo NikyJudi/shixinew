@@ -1,0 +1,9 @@
+首页home.jsp
+jdk 1.8 
+sql文件在src/db
+src/main/resources/application.properties  改自己的数据库信息
+src/main/resources/log4j.properties 改自己的盘 没有会创建但保证某个盘存在
+maven自己配
+
+白盒测试接口只测试controller中的接口（postman）
+黑盒测试点网页有bug提出来

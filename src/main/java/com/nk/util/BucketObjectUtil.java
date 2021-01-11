@@ -12,10 +12,12 @@ import com.obs.services.model.ObsObject;
 import com.obs.services.model.PutObjectResult;
 import com.obs.services.model.TemporarySignatureRequest;
 import com.obs.services.model.TemporarySignatureResponse;
+import org.springframework.stereotype.Component;
 
 /**
  * 作者: 杜丹东 D.D.D 日期: 2020年4月7日下午3:44:27
  */
+@Component
 public class BucketObjectUtil {
 	// 官方帮助文档
 	// https://obssdk.obs.cn-north-1.myhuaweicloud.com/apidoc/cn/java/index.html
@@ -29,7 +31,7 @@ public class BucketObjectUtil {
 
 	private static final String bucketName = "nkdetong";
 
-	public ObsClient getInstance() {
+	public static ObsClient getInstance() {
 		return new ObsClient(ak, sk, endPoint);
 	}
 

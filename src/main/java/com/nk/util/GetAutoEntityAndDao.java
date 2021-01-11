@@ -2,6 +2,9 @@ package com.nk.util;
 
 import org.mybatis.generator.api.ShellRunner;
 
+/**
+ *
+ */
 public class GetAutoEntityAndDao {
 
     // 该配置文件放在src\\main\\resources\\该路径下即可

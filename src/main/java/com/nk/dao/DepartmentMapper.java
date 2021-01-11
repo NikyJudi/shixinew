@@ -7,7 +7,11 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
+/**
+ * author: ningkun
+ * date: 2021/01/05
+ * 部门mapper
+ */
 @Mapper
 public interface DepartmentMapper {
     long countByExample(DepartmentExample example);

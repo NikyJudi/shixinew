@@ -2,7 +2,11 @@ package com.nk.util;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * @author ningkun
+ * @date 2021/01/05
+ * 封装返回消息
+ */
 public class Msg {
 	private int code;  //处理状态代码 101成功 102失败
 	private String msg;

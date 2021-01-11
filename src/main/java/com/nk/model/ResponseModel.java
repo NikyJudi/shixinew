@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import java.io.Serializable;
 
 /**
- * @全局API接口
+ * author: ningkun
+ * date: 2021/01/05
+ * 全局API接口
  */
 @Data
 @ApiModel(description = "全局API接口")

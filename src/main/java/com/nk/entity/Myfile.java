@@ -1,7 +1,10 @@
 package com.nk.entity;
 
 import lombok.Data;
-
+/**
+ * author: ningkun
+ * date: 2021/01/05
+ */
 @Data
 public class Myfile {
     private Long id;
@@ -20,4 +23,8 @@ public class Myfile {
 
     private Functionary functionary;
 
+    /**
+     * 删除状态
+     */
+    private Integer deletestatus;
 }

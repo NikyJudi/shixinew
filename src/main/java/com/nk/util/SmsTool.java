@@ -7,7 +7,10 @@ import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
-
+/**
+ * author: ningkun
+ * date: 2021/01/05
+ */
 public class SmsTool {
     //产品名称:云通信短信API产品,开发者无需替换
     static final String product = "Dysmsapi";

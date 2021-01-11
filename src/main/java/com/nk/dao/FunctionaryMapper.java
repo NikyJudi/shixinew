@@ -7,7 +7,11 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
+/**
+ * author: ningkun
+ * date: 2021/01/
+ * 用户mapper
+ */
 @Mapper
 public interface FunctionaryMapper {
     long countByExample(FunctionaryExample example);

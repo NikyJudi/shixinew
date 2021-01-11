@@ -2,7 +2,11 @@ package com.nk.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * author: ningkun
+ * date: 2021/01/05
+ * 暂时没什么用
+ */
 public class DepartmentExample {
     protected String orderByClause;
 

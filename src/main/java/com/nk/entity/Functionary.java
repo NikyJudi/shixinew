@@ -6,7 +6,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
-
+/**
+ * author: ningkun
+ * date: 2021/01/05
+ * 用户实体类
+ */
 @Data
 public class Functionary {
     private Integer jobId;

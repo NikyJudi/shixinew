@@ -11,7 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
-
+/**
+ * author: ningkun
+ * date: 2021/01/05
+ * 管理员操作
+ */
 @Controller
 @RequestMapping("/admin")
 public class adminController {
@@ -46,6 +50,11 @@ public class adminController {
         return Msg.success().add("message","修改成功");
     }
 
+    /**
+     * 登录
+     * @param loginEntity
+     * @return
+     */
     @ResponseBody
     @GetMapping("/login")
     public Msg login(LoginEntity loginEntity){

@@ -3,10 +3,14 @@ package com.nk.util;
 import java.io.UnsupportedEncodingException;
 
 /**
+ *  @author ningkun
+ *  @date 2021/01/03
  * 取得给定汉字串的首字母串,即声母串
  * Title: ChineseCharToEn
- * @date 注：只支持GB2312字符集中的汉字
+ *  注：只支持GB2312字符集中的汉字很少
  */
+
+
 public final class ChineseCharToEn {
     private final static int[] li_SecPosValue = { 1601, 1637, 1833, 2078, 2274,
             2302, 2433, 2594, 2787, 3106, 3212, 3472, 3635, 3722, 3730, 3858,

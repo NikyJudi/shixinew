@@ -1,7 +1,11 @@
 package com.nk.entity;
 
 import lombok.Data;
-
+/**
+ * author: ningkun
+ * date: 2020/01/05
+ * 部门实体
+ */
 @Data
 public class Department {
     private Integer departmentId;

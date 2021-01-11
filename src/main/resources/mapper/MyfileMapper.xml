@@ -1,61 +1,180 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nk.dao.MyfileMapper">
-  <resultMap id="BaseResultMap" type="com.nk.entity.Myfile">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="fname" jdbcType="VARCHAR" property="fname" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="cdate" jdbcType="VARCHAR" property="cdate" />
-    <result column="fsize" jdbcType="DOUBLE" property="fsize" />
-    <result column="ftype" jdbcType="VARCHAR" property="ftype" />
-    <result column="funid" jdbcType="INTEGER" property="funid" />
-  </resultMap>
-  <resultMap id="WithFunResultMap" type="com.nk.entity.Myfile">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="fname" jdbcType="VARCHAR" property="fname" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="cdate" jdbcType="VARCHAR" property="cdate" />
-    <result column="fsize" jdbcType="DOUBLE" property="fsize" />
-    <result column="ftype" jdbcType="VARCHAR" property="ftype" />
-    <association property="functionary" javaType="com.nk.entity.Functionary">
-      <id column="Job_id" property="jobId"/>
-      <result column="name" property="name"/>
-    </association>
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from myfile
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="com.nk.entity.Myfile">
-    insert into myfile (id, fname, url,
-      cdate, fsize, ftype, 
-      funid)
-    values (#{id,jdbcType=BIGINT}, #{fname,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
-      #{cdate,jdbcType=VARCHAR}, #{fsize,jdbcType=DOUBLE}, #{ftype,jdbcType=VARCHAR}, 
-      #{funid,jdbcType=INTEGER})
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="com.nk.entity.Myfile">
-    update myfile
-    set fname = #{fname,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR},
-      cdate = #{cdate,jdbcType=VARCHAR},
-      fsize = #{fsize,jdbcType=DOUBLE},
-      ftype = #{ftype,jdbcType=VARCHAR},
-      funid = #{funid,jdbcType=INTEGER}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select id, fname, url, cdate, fsize, ftype, funid
-    from myfile
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <select id="selectAll" resultMap="WithFunResultMap">
-    select m.id, m.fname, m.url, m.cdate, m.fsize, m.ftype, f.name
-    from myfile m left join functionary f on f.Job_id=m.funid
-  </select>
-    <select id="selectByFunId" resultMap="WithFunResultMap">
-      select m.id, m.fname, m.url, m.cdate, m.fsize, m.ftype, f.name
-      from myfile m left join functionary f on f.Job_id=m.funid
-        where m.funid = #{id,jdbcType=BIGINT}
+    <resultMap id="BaseResultMap" type="com.nk.entity.Myfile">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="fname" jdbcType="VARCHAR" property="fname"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="cdate" jdbcType="VARCHAR" property="cdate"/>
+        <result column="fsize" jdbcType="DOUBLE" property="fsize"/>
+        <result column="ftype" jdbcType="VARCHAR" property="ftype"/>
+        <result column="funid" jdbcType="INTEGER" property="funid"/>
+        <result column="deletestatus" jdbcType="INTEGER" property="deletestatus"/>
+    </resultMap>
+    <resultMap id="WithFunResultMap" type="com.nk.entity.Myfile">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="fname" jdbcType="VARCHAR" property="fname"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="cdate" jdbcType="VARCHAR" property="cdate"/>
+        <result column="fsize" jdbcType="DOUBLE" property="fsize"/>
+        <result column="ftype" jdbcType="VARCHAR" property="ftype"/>
+        <result column="deletestatus" jdbcType="INTEGER" property="deletestatus"/>
+        <association property="functionary" javaType="com.nk.entity.Functionary">
+            <id column="Job_id" property="jobId"/>
+            <result column="name" property="name"/>
+        </association>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , fname, url, cdate, fsize, ftype, funid, deletestatus
+    </sql>
+    <sql id="Base_Column_List2">
+        m
+        .
+        id
+        , m.fname, m.url, m.cdate, m.fsize, m.ftype,m.deletestatus,m.funid
+    </sql>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from myfile
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.nk.entity.Myfile">
+        insert into myfile (id, fname, url,
+                            cdate, fsize, ftype,
+                            funid)
+        values (#{id,jdbcType=BIGINT}, #{fname,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
+                #{cdate,jdbcType=VARCHAR}, #{fsize,jdbcType=DOUBLE}, #{ftype,jdbcType=VARCHAR},
+                #{funid,jdbcType=INTEGER})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.nk.entity.Myfile">
+        update myfile
+        <set>
+            <if test="record.fname != null">
+                fname = #{fname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cdate != null">
+                cdate = #{cdate,jdbcType=VARCHAR},
+            </if>
+            <if test="record.fsize != null">
+                fsize = #{fsize,jdbcType=DOUBLE},
+            </if>
+            <if test="record.ftype != null">
+                ftype = #{ftype,jdbcType=VARCHAR},
+            </if>
+            <if test="record.funid != null">
+                funid = #{funid,jdbcType=INTEGER},
+            </if>
+            <if test="record.deletestatus != null">
+                deletestatus = #{deletestatus, jdbcType=INTEGER}
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateDeleteStatus">
+        update myfile
+        set deletestatus = 1
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="recover">
+        update myfile
+        set deletestatus = 0
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="recover2">
+        update myfile
+        set deletestatus = 0
+        where funid = #{jobid,jdbcType=BIGINT}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select id,
+               fname,
+               url,
+               cdate,
+               fsize,
+               ftype,
+               funid,
+               deletestatus
+        from myfile
+        where id = #{id,jdbcType=BIGINT}
     </select>
+    <select id="selectAll" resultMap="WithFunResultMap">
+        select m.id,
+               m.fname,
+               m.url,
+               m.cdate,
+               m.fsize,
+               m.ftype,
+               m.deletestatus,
+               f.name
+        from myfile m
+                 left join functionary f on f.Job_id = m.funid
+        where m.deletestatus=0
+    </select>
+    <select id="selectByFunId" resultMap="WithFunResultMap">
+        select m.id,
+               m.fname,
+               m.url,
+               m.cdate,
+               m.fsize,
+               m.ftype,
+               m.deletestatus,
+               f.name
+        from myfile m
+                 left join functionary f on f.Job_id = m.funid
+        where m.funid = #{id,jdbcType=BIGINT} and m.deletestatus=0
+    </select>
+    <select id="selectByFunId2" resultMap="WithFunResultMap">
+        select m.id,
+               m.fname,
+               m.url,
+               m.cdate,
+               m.fsize,
+               m.ftype,
+               m.deletestatus,
+               f.name
+        from myfile m
+                 left join functionary f on f.Job_id = m.funid
+        where m.funid = #{id,jdbcType=BIGINT} and m.deletestatus=1
+    </select>
+    <select id="selectByKey" resultMap="WithFunResultMap" parameterType="java.lang.String">
+        select m.id,
+               m.fname,
+               m.url,
+               m.cdate,
+               m.fsize,
+               m.ftype,
+               m.deletestatus,
+               f.name
+        from myfile m
+                 left join functionary f on f.Job_id = m.funid
+        where m.fname like concat('%', #{key}, '%')
+           or f.name like concat('%', #{key}, '%')
+    </select>
+
+    <select id="selectByKey2" resultMap="WithFunResultMap">
+        select m.id,
+               m.fname,
+               m.url,
+               m.cdate,
+               m.fsize,
+               m.ftype,
+               m.deletestatus,
+               f.name
+        from myfile m
+                 left join functionary f on f.Job_id = m.funid
+        where m.fname like concat('%', #{key, jdbcType = VARCHAR}, '%')
+           or f.name like concat('%', #{key, jdbcType = VARCHAR}, '%')
+            and m.funid = #{id, jdbcType=BIGINT}
+    </select>
+    <select id="selectAllGarbage" resultType="com.nk.entity.Myfile">
+        select <include refid="Base_Column_List2"/>, f.name
+        from myfile m left join functionary f on f.Job_id = m.funid
+        where m.funid = #{jobid, jdbcType=BIGINT} and m.deletestatus=1
+    </select>
+
+
 </mapper>

@@ -5,9 +5,6 @@ import java.util.List;
 import com.nk.util.BucketObjectUtil;
 import com.obs.services.model.ObsObject;
 
-/**
- * 作者: 杜丹东 D.D.D 日期: 2020年4月7日下午3:53:18
- */
 public class BucketOperationTest {
 	public static void main(String[] args) throws IOException {
 		BucketObjectUtil objectUtil = new BucketObjectUtil();

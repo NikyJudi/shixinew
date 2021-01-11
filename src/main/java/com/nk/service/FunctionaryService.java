@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+/**
+ * author: ningkun
+ * date: 2021/01/05
+ */
 @Service
 public class FunctionaryService {
 	@Autowired
@@ -20,11 +23,9 @@ public class FunctionaryService {
 		functionaryExample.setOrderByClause("Job_id ASC");
 		return functionaryMapper.selectByExampleWithDepart(functionaryExample);
 	}
-	//��ȡһ��ѧ����Ϣ
 	public Functionary getFunctionary(Integer id) {
 		return functionaryMapper.selectByPrimaryKeyWithDepart(id);
 	}
-	//��������Ƿ����
 	public boolean validateName(String name) {
 		FunctionaryExample functionaryExample=new FunctionaryExample();
 		FunctionaryExample.Criteria criteria = functionaryExample.createCriteria();
@@ -40,15 +41,14 @@ public class FunctionaryService {
 		functionaryMapper.insertSelective(functionary);
 		
 	}
-	//����
 	public void updateFunctionary(Functionary functionary) {
 		functionaryMapper.updateByPrimaryKeySelective(functionary);
 	}
-	//ɾ������ѧ��
+
 	public void deleteFunctionary(Integer id) {
 		functionaryMapper.deleteByPrimaryKey(id);
 	}
-	//����ɾ��
+
 	public void deleteFunctionaryBatch(List<Integer> ids) {
 		FunctionaryExample functionaryExample=new FunctionaryExample();
 		FunctionaryExample.Criteria criteria = functionaryExample.createCriteria();

@@ -1,4 +1,4 @@
-package com.nk.handler;
+package com.nk.controller;
 
 
 import com.nk.entity.Department;
@@ -10,11 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-
+/**
+ * author: ningkun
+ * date: 2021/01/05
+ * 部门操作
+ */
 @Controller
 public class DepartHandler {
 	@Autowired
 	private DepartmentService departService;
+
+	/**
+	 * 获取所有部门
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("/departs")
 	public Msg getDeparts() {
