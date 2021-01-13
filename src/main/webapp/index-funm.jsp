@@ -40,9 +40,6 @@ h1 {
     margin: auto;
     width: 980px;
 }
-#fi_file,#up_file{
-    width: 65px;
-}
 #text_file{
     width: 220px;
 }
@@ -59,9 +56,10 @@ h1 {
 	margin-bottom: -40px;
 }
 #up_file{
-    margin-left: 300px;
+    width: 65px;
+    margin-left: 240px;
     margin-top: -35px;
-    width: 110px;
+    width: 180px;
 }
 #fun_table{
     width: 980px;
@@ -74,11 +72,11 @@ h1 {
     text-align: center;
 }
 #man_btn{
-    margin-top: 4px;
+    margin-top: 5px;
     background: none;
     border: none;
     color: black;
-    font-size: 15px;
+    font-size: 14.5px;
 }
 </style>
 </head>
@@ -112,9 +110,9 @@ h1 {
                     </ul>
                     <form class="navbar-form navbar-left" id="form">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="查找资源文件……" id="text_file">
+                            <input type="text" class="form-control" placeholder="当前页动态输入查询文件……" id="text_file">
                         </div>
-                        <button type="submit" class="btn btn-default" id="fi_file">查找</button>
+
                         <input type="file" class="btn btn-default" id="up_file" name="up_file" />
                     </form>
                     <ul class="nav navbar-nav navbar-right">
@@ -126,6 +124,7 @@ h1 {
                         <li>
                             <!-- Button trigger modal -->
                             <button id="man_btn" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                                 管理系统
                             </button>
 
@@ -154,13 +153,15 @@ h1 {
             </div><!-- /.container-fluid -->
         </nav>
         <div class="container">
+            <span>(预览仅支持图片格式,其他格式文件点击预览/下载到本地进行浏览)</span>
+            <br />
+            <br />
             <!-- data -->
             <div class="row">
                 <table class="table table-striped table-hover table-condensed"
                        id="fun_table">
                     <thead>
                     <tr>
-                        <th><input type="checkbox" id="check_All" /></th>
                         <th>序号</th>
                         <th>文件名称</th>
                         <th>上传时间</th>
@@ -219,9 +220,8 @@ h1 {
                 .each(
                     fpage,
                     function(index, item) {
-                        var checkTd = $("<td><input type='checkbox' class='check_item'/></td>");
                         var f_idTd = $("<td></td>").append(item.id);
-                        var nameTd = $("<td></td>").append(item.fname);
+                        var nameTd = $("<td></td>").append(item.fname).addClass('filename');
                         //var urlTd = $("<td></td>").append(item.url);
                         var dateTd = $("<td></td>").append(
                             new Date(item.cdate)
@@ -262,7 +262,7 @@ h1 {
                         dowBtn.attr("dow-funid", item.id);
                         var dowBtnTd = $("<td></td>").append(dowBtn);
 
-                        $("<tr></tr>").append(checkTd).append(f_idTd)
+                        $("<tr></tr>").append(f_idTd)
                             .append(nameTd).append(
                             dateTd).append(sizeTd)
                             .append(typeTd).append(f_nameTd).append(lookBtnTd).append(dowBtnTd)
@@ -338,6 +338,52 @@ h1 {
             $(".check_item").prop("checked", $(this).prop("checked"));
         });
 
+        $().ready(function() {
+            $("#text_file").keyup(
+                function() {
+                        $("#fun_table tr:gt(0)").hide();
+                        var $d = $("#fun_table tr:gt(0)").filter(":contains('" + $.trim($("#text_file").val()) + "')");
+                        $d.show();
+            })
+        })
+
+        $(document).on(
+            "click",
+            ".look-btn",
+            function() {
+                var fName = $(this).parent().parent().find("td:eq(2)")
+                    .text();
+                $.ajax({
+                    url : "${pagaContext.request.contextPath} file/preview/"
+                        + $(this).attr("look-funid"),
+                    type : "GET",
+                    success : function(result) {
+                        var url_n = result.data.stream;
+                        console.log(url_n)
+                        window.open(url_n,'_blank');
+                    }
+                });
+            });
+
+        $(document).on(
+            "click",
+            ".dow-btn",
+            function() {
+                var fName = $(this).parent().parent().find("td:eq(2)")
+                    .text();
+                if (confirm("确定要下载" + fName + "吗？")) {
+                    $.ajax({
+                        url : "${pagaContext.request.contextPath} file/download/"
+                            + $(this).attr("dow-funid"),
+                        type : "GET",
+                        success : function(result) {
+                            alert(result.msg);
+                            showPage(currPage);
+                        }
+                    });
+                }
+            });
+
         var loc=location.href;
         var n1=loc.length;//地址的总长度
         var n2=loc.indexOf("?");//取得=号的位置
@@ -410,7 +456,7 @@ h1 {
         window.open("login.jsp","_self");
     });
 	 $("#myfun").click(function(){
-            location.href="index-funfunm.jsp?"+"                           jobId="+jobid+"&"+"                              password="+password;
+         location.href="index-funfunm.jsp?"+"                           jobId="+jobid+"&"+"                              password="+password;
      });
 	</script>
 </body>

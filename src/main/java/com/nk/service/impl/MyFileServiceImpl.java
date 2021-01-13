@@ -59,7 +59,7 @@ public class MyFileServiceImpl implements MyFileService {
     @Override
     public Msg updateDeleteStatus(Long id, Long jobid) {
         Myfile myfile = myfileMapper.selectByPrimaryKey(id);
-        if (Objects.isNull(myfile) || Long.valueOf(myfile.getFunid()).equals(jobid)) {
+        if (Objects.isNull(myfile) || !Long.valueOf(myfile.getFunid()).equals(jobid)) {
             return Msg.fail().add("message", "你无权操作此文件");
         }
         myfileMapper.updateDeleteStatus(id);

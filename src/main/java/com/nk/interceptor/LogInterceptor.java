@@ -15,19 +15,10 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * author: ningkun
  * date: 2021/01/05
  */
-@Component // 不知道属于哪一层时使用
+@Component
 public class LogInterceptor extends HandlerInterceptorAdapter {
     private static final Logger LOG = Logger.getLogger(LogInterceptor.class);
 
-    //	@Override
-//	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-//			throws Exception {
-//		String IP = request.getRemoteAddr();
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ss.SSSZ");
-//		String time = sdf.format(new Date());
-//		LOG.info("IP地址为：" + IP + "的用户在" + time + "登录了系统");
-//		return super.preHandle(request, response, handler);
-//	}
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession(false);//获取session，如果没有，返回null

@@ -1,927 +1,943 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>花花世界有限公司员工信息</title>
-	<script type="text/javascript"
-			src="${pagaContext.request.contextPath }static/jquery-3.5.0.min.js"></script>
-	<script type="text/javascript"
-			src="${pagaContext.request.contextPath }static/dist/js/bootstrap.min.js"></script>
-	<link
-			href="${pagaContext.request.contextPath }static/dist/css/bootstrap.min.css"
-			rel="stylesheet">
-<style type="text/css">
-.container {
-	width: 1150px;
-	margin-top: 15px;
-}
-.table th {
-	font-size: 15.4px;
-	text-align: center;
-}
-.table {
-	text-align: center;
-}
-#page_nav_area {
-	margin-top: -45px;
-	margin-left: 700px;
-}
-#page_page_area {
-	margin-top: 120px;
-}
-.dd1 {
-	background: #FFFAFA;
-	margin-top: -25px;
-	height: 700px;
-}
-#p1 {
-	margin-left: 230px;
-	padding-top: 50px;
-}
-</style>
+    <meta charset="UTF-8">
+    <title>花花世界有限公司员工信息</title>
+    <script type="text/javascript"
+            src="${pagaContext.request.contextPath }static/jquery-3.5.0.min.js"></script>
+    <script type="text/javascript"
+            src="${pagaContext.request.contextPath }static/dist/js/bootstrap.min.js"></script>
+    <link
+            href="${pagaContext.request.contextPath }static/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+    <style type="text/css">
+        .container {
+            width: 1150px;
+            margin-top: 15px;
+        }
+
+        .table th {
+            font-size: 15.4px;
+            text-align: center;
+        }
+
+        .table {
+            text-align: center;
+        }
+
+        #page_nav_area {
+            margin-top: -45px;
+            margin-left: 700px;
+        }
+
+        .dd1 {
+            background: #FFFAFA;
+            margin-top: -25px;
+            height: 700px;
+        }
+
+        #p1 {
+            margin-left: 230px;
+            padding-top: 50px;
+        }
+
+		#up_file{
+			height: 35px;
+            margin-top: -35px;
+            margin-left: 30px;
+            width: 240px;
+		}
+
+        #txt_file{
+            font-size: 16px;
+            margin-left: -90px;
+        }
+
+		#back_pool0{
+			border: 5px solid #b9def0;
+			border-radius: 55px;
+		}
+    </style>
 </head>
 <body>
-	<div class="dd1">
-		<div class="modal fade" id="funSelModal" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="myModalLabel">查找员工信息</h4>
-					</div>
-					<div class="modal-body">
-						<form class="form-horizontal" method="post">
-							<div class="form-group">
-								<label for="jobId" class="col-sm-2 control-label">工号:</label>
-								<div class="col-sm-10" id="name_reg">
-									<input type="text" class="form-control" name="jobId"
-										id="id_input" placeholder="请输入工号"><span
-										class="help-block"></span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="name" class="col-sm-2 control-label">姓名:</label>
-								<div class="col-sm-10" id="name_reg">
-									<input type="text" class="form-control" name="name"
-										id="name_input_s"><span class="help-block"></span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="sex" class="col-sm-2 control-label">性别:</label>
-								<div class="col-sm-10">
-									<label class="radio-inline"> <input type="radio"
-										name="sex" id="gender1_input" value="男" checked="checked">
-										男
-									</label> <label class="radio-inline"> <input type="radio"
-										name="sex" id="gender2_input" value="女"> 女
-									</label>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="email" class="col-sm-2 control-label">邮箱:</label>
-								<div class="col-sm-10" id="email_reg">
-									<input type="email" class="form-control" id="email_input_s"
-										name="email"> <span class="help-block"></span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="phoneNum" class="col-sm-2 control-label">联系方式:</label>
-								<div class="col-sm-10" id="phone_reg">
-									<input type="phoneNum" class="form-control" id="phone_input_s"
-										name="phoneNum"> <span class="help-block"></span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="birth" class="col-sm-2 control-label">出生日期:</label>
-								<div class="col-sm-10" id="birth_reg">
-									<input type="birth" class="form-control" id="birth_input_s"
-										name="birth"><span class="help-block"></span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="entryTime" class="col-sm-2 control-label">入职时间:</label>
-								<div class="col-sm-10" id="entry_reg">
-									<input type="entry" class="form-control" id="entry_input_s"
-										name="entryTime"> <span class="help-block"></span>
-								</div>
-							</div>
+<div class="dd1">
+    <div class="modal fade" id="funSelModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">查找员工信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="post">
+                        <div class="form-group">
+                            <label for="jobId" class="col-sm-2 control-label">工号:</label>
+                            <div class="col-sm-10" id="name_reg">
+                                <input type="text" class="form-control" name="jobId"
+                                       id="id_input" placeholder="请输入工号"><span
+                                    class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">姓名:</label>
+                            <div class="col-sm-10" id="name_reg">
+                                <input type="text" class="form-control" name="name"
+                                       id="name_input_s"><span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sex" class="col-sm-2 control-label">性别:</label>
+                            <div class="col-sm-10">
+                                <label class="radio-inline"> <input type="radio"
+                                                                    name="sex" id="gender1_input" value="男"
+                                                                    checked="checked">
+                                    男
+                                </label> <label class="radio-inline"> <input type="radio"
+                                                                             name="sex" id="gender2_input" value="女"> 女
+                            </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-sm-2 control-label">邮箱:</label>
+                            <div class="col-sm-10" id="email_reg">
+                                <input type="email" class="form-control" id="email_input_s"
+                                       name="email"> <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNum" class="col-sm-2 control-label">联系方式:</label>
+                            <div class="col-sm-10" id="phone_reg">
+                                <input type="phoneNum" class="form-control" id="phone_input_s"
+                                       name="phoneNum"> <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="birth" class="col-sm-2 control-label">出生日期:</label>
+                            <div class="col-sm-10" id="birth_reg">
+                                <input type="birth" class="form-control" id="birth_input_s"
+                                       name="birth"><span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="entryTime" class="col-sm-2 control-label">入职时间:</label>
+                            <div class="col-sm-10" id="entry_reg">
+                                <input type="entry" class="form-control" id="entry_input_s"
+                                       name="entryTime"> <span class="help-block"></span>
+                            </div>
+                        </div>
 
-							<div class="form-group">
-								<label class="col-sm-2 control-label">部门名称:</label>
-								<div class="col-sm-10">
-									<select class="form-control" name="departmentId"
-										id="depart_input">
-									</select>
-								</div>
-							</div>
-						</form>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">取消</button>
-							<button type="button" class="btn btn-primary" id="fun_sel_btn">查找</button>
-						</div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">部门名称:</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="departmentId"
+                                        id="depart_input">
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default"
+                                data-dismiss="modal">取消
+                        </button>
+                        <button type="button" class="btn btn-primary" id="fun_sel_btn">查找</button>
+                    </div>
 
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="modal fade" id="funUpdateModal" tabindex="-1"
-			role="dialog" aria-labelledby="myModalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="myModalLabel">修改员工信息</h4>
-					</div>
-					<div class="modal-body">
-						<form class="form-horizontal" method="post">
-							<div class="form-group">
-								<label for="name" class="col-sm-2 control-label">姓名:</label>
-								<div class="col-sm-10" id="name_reg">
-									<input type="text" class="form-control" name="name"
-										id="name_input" placeholder="请输入名字"><span
-										class="help-block"></span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="sex" class="col-sm-2 control-label">性别:</label>
-								<div class="col-sm-10">
-									<label class="radio-inline"> <input type="radio"
-										name="sex" id="gender1_input" value="男" checked="checked">
-										男
-									</label> <label class="radio-inline"> <input type="radio"
-										name="sex" id="gender2_input" value="女"> 女
-									</label>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="email" class="col-sm-2 control-label">邮箱:</label>
-								<div class="col-sm-10" id="email_reg">
-									<input type="email" class="form-control" id="email_input"
-										name="email" placeholder="请输入邮箱"> <span
-										class="help-block"></span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="phoneNum" class="col-sm-2 control-label">联系方式:</label>
-								<div class="col-sm-10" id="phone_reg">
-									<input type="phoneNum" class="form-control" id="phone_input"
-										name="phoneNum" placeholder="1xxxxxxxxxx,0xx-xxxxxxxx">
-									<span class="help-block"></span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="birth" class="col-sm-2 control-label">出生日期:</label>
-								<div class="col-sm-10" id="birth_reg">
-									<input type="date" class="form-control" id="birth_input_up"
-										name="birth" placeholder="1992-01-01,1992-1-1"><span
-										class="help-block"></span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="entryTime" class="col-sm-2 control-label">入职时间:</label>
-								<div class="col-sm-10" id="entry_reg">
-									<input type="date" class="form-control" id="entry_input"
-										name="entryTime" placeholder="2015-04-30,2015-4-30"> <span
-										class="help-block"></span>
-								</div>
-							</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="funUpdateModal" tabindex="-1"
+         role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">修改员工信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="post">
+                        <div class="form-group">
+                            <label for="phoneNum" class="col-sm-2 control-label">联系方式:</label>
+                            <div class="col-sm-10" id="phone_reg">
+                                <input type="phoneNum" class="form-control" id="phone_input"
+                                       name="phoneNum" placeholder="1xxxxxxxxxx,0xx-xxxxxxxx">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="fun_update_btn">修改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 新增的模态框 -->
+    <div class="modal fade" id="funAddModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">添加员工信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="post">
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">姓名:</label>
+                            <div class="col-sm-10" id="name_reg">
+                                <input type="text" class="form-control" name="name"
+                                       id="funName_input" placeholder="请输入名字"><span
+                                    class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sex" class="col-sm-2 control-label">性别:</label>
+                            <div class="col-sm-10">
+                                <label class="radio-inline"> <input type="radio"
+                                                                    name="sex" id="gender1_update_input" value="男"
+                                                                    checked="checked"> 男
+                                </label> <label class="radio-inline"> <input type="radio"
+                                                                             name="sex" id="gender2_update_input"
+                                                                             value="女"> 女
+                            </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-sm-2 control-label">邮箱:</label>
+                            <div class="col-sm-10" id="email_reg">
+                                <input type="email" class="form-control"
+                                       id="email_update_input" name="email" placeholder="请输入邮箱">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNum" class="col-sm-2 control-label">联系方式:</label>
+                            <div class="col-sm-10" id="phone_reg">
+                                <input type="phoneNum" class="form-control"
+                                       id="phone_update_input" name="phoneNum"
+                                       placeholder="1xxxxxxxxxx,0xx-xxxxxxxx"> <span
+                                    class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="birth" class="col-sm-2 control-label">出生日期:</label>
+                            <div class="col-sm-10" id="birth_reg">
+                                <input type="birth" class="form-control"
+                                       id="birth_update_input" name="birth"
+                                       placeholder="1992-01-01,1992-1-1"><span
+                                    class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="entryTime" class="col-sm-2 control-label">入职时间:</label>
+                            <div class="col-sm-10" id="entry_reg">
+                                <input type="entryTime" class="form-control"
+                                       id="entry_update_input" name="entryTime"
+                                       placeholder="2015-04-30,2015-4-30"> <span
+                                    class="help-block"></span>
+                            </div>
+                        </div>
 
-							<div class="form-group">
-								<label class="col-sm-2 control-label">部门名称:</label>
-								<div class="col-sm-10">
-									<select class="form-control" name="departmentId"
-										id="depart_input">
-									</select>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary" id="fun_update_btn">修改</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- 新增的模态框 -->
-		<div class="modal fade" id="funAddModal" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="myModalLabel">添加员工信息</h4>
-					</div>
-					<div class="modal-body">
-						<form class="form-horizontal" method="post">
-							<div class="form-group">
-								<label for="name" class="col-sm-2 control-label">姓名:</label>
-								<div class="col-sm-10" id="name_reg">
-									<input type="text" class="form-control" name="name"
-										id="funName_input" placeholder="请输入名字"><span
-										class="help-block"></span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="sex" class="col-sm-2 control-label">性别:</label>
-								<div class="col-sm-10">
-									<label class="radio-inline"> <input type="radio"
-										name="sex" id="gender1_update_input" value="男"
-										checked="checked"> 男
-									</label> <label class="radio-inline"> <input type="radio"
-										name="sex" id="gender2_update_input" value="女"> 女
-									</label>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="email" class="col-sm-2 control-label">邮箱:</label>
-								<div class="col-sm-10" id="email_reg">
-									<input type="email" class="form-control"
-										id="email_update_input" name="email" placeholder="请输入邮箱">
-									<span class="help-block"></span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="phoneNum" class="col-sm-2 control-label">联系方式:</label>
-								<div class="col-sm-10" id="phone_reg">
-									<input type="phoneNum" class="form-control"
-										id="phone_update_input" name="phoneNum"
-										placeholder="1xxxxxxxxxx,0xx-xxxxxxxx"> <span
-										class="help-block"></span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="birth" class="col-sm-2 control-label">出生日期:</label>
-								<div class="col-sm-10" id="birth_reg">
-									<input type="birth" class="form-control"
-										id="birth_update_input" name="birth"
-										placeholder="1992-01-01,1992-1-1"><span
-										class="help-block"></span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="entryTime" class="col-sm-2 control-label">入职时间:</label>
-								<div class="col-sm-10" id="entry_reg">
-									<input type="entryTime" class="form-control"
-										id="entry_update_input" name="entryTime"
-										placeholder="2015-04-30,2015-4-30"> <span
-										class="help-block"></span>
-								</div>
-							</div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">部门名称:</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="departmentId"
+                                        id="depart_name">
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="fun_save_btn">保存</button>
 
-							<div class="form-group">
-								<label class="col-sm-2 control-label">部门名称:</label>
-								<div class="col-sm-10">
-									<select class="form-control" name="departmentId"
-										id="depart_name">
-									</select>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary" id="fun_save_btn">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<p id="p1">
-			<button type="button" class="btn btn-info">
-				<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-				<a id="back_pool">Back</a>
-			</button>
-		</p>
-		<div class="container">
-			<!-- title -->
-			<div class="row">
-				<div class="col-md-12">
-					<h2>所有员工信息</h2>
-				</div>
-			</div>
-			<!-- button -->
-			<div class="row">
-				<div class="col-md-4 col-md-offset-8">
-					<button type="button" class="btn btn-success"
-						id="fun_sel_modal_btn">
+    <p id="p1">
+        <button type="button" class="btn btn-info" id="back_pool0">
+            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+            <a id="back_pool">Back</a>
+        </button>
+    </p>
+    <div class="container">
+        <!-- title -->
+        <div class="row">
+            <div class="col-md-12">
+                <h2>所有员工信息</h2>
+            </div>
+        </div>
+        <!-- button -->
+        <div class="row">
+            <div class="col-md-10 col-md-offset-5">
+                <div class="col-md-4">
+                    <form class="navbar-form navbar-left" id="form">
+                        <label id="txt_file"> <span class="glyphicon glyphicon-file" aria-hidden="true"></span>文件批量导入:</label>
+                        <input type="file" class="btn btn-default" id="up_file" name="up_file" />
+                    </form>
+                </div><!-- /.col-lg-6 -->
+                &nbsp;
+                <button type="button" class="btn btn-success"
+                        id="fun_sel_modal_btn">
 						<span class="glyphicon glyphicon-zoom-in" aria-hidden="true">
 							查看</span>
-					</button>
-					&nbsp;&nbsp;
-					<button type="button" class="btn btn-primary"
-						id="fun_add_modal_btn">
+                </button>
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-primary"
+                        id="fun_add_modal_btn">
 						<span class="glyphicon glyphicon-plus" aria-hidden="true">
 							新增</span>
-					</button>
-					&nbsp;&nbsp;
-					<button type="button" class="btn btn-danger" id="fun_del_modal_btn">
-						<span class="glyphicon glyphicon-trash" aria-hidden="true">
+                </button>
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-danger" id="fun_del_modal_btn">
+						<span class="glyphicon glyphicon-eye-close" aria-hidden="true">
 							删除</span>
-					</button>
-				</div>
-			</div>
-			<!-- data -->
-			<div class="row">
-				<table class="table table-striped table-hover table-condensed"
-					id="fun_table">
-					<thead>
-						<tr>
-							<th><input type="checkbox" id="check_All" /></th>
-							<th>工号</th>
-							<th>姓名</th>
-							<th>性别</th>
-							<th>邮箱</th>
-							<th>联系方式</th>
-							<th>出生日期</th>
-							<th>入职时间</th>
-							<th>部门名称</th>
-							<th>员工状态(1:活跃;0:禁用)</th>
-							<th>云盘使用(1:活跃;0:禁用)</th>
-							<th>编辑</th>
-							<th>删除</th>
-						</tr>
-					</thead>
-					<tbody>
+                </button>
+                <br/><br/>
+            </div>
+        </div>
+        <!-- data -->
+        <div class="row">
+            <table class="table table-striped table-hover table-condensed"
+                   id="fun_table">
+                <thead>
+                <tr>
+                    <th><input type="checkbox" id="check_All"/></th>
+                    <th>工号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>邮箱</th>
+                    <th>联系方式</th>
+                    <th>出生日期</th>
+                    <th>入职时间</th>
+                    <th>部门名称</th>
+                    <th>员工状态(1:活跃;0:禁用)</th>
+                    <th>云盘使用(1:活跃;0:禁用)</th>
+                    <th>编辑</th>
+                    <th>删除</th>
+                </tr>
+                </thead>
+                <tbody>
 
-					</tbody>
-				</table>
-			</div>
-			<!-- paging info -->
-			<div class="row">
-				<div class="col-md-6" id="page_info_area"></div>
-				<div class="col-md-6 " id="page_nav_area"></div>
-			</div>
-		</div>
-	</div>
+                </tbody>
+            </table>
+        </div>
+        <!-- paging info -->
+        <div class="row">
+            <div class="col-md-6" id="page_info_area"></div>
+            <div class="col-md-6 " id="page_nav_area"></div>
+        </div>
+    </div>
+</div>
 
-	<script type="text/javascript">
-		var totalPage;
-		var currPage;
-		var listPage;
-		var allPage;
-		var loc=location.href;
-		var n1=loc.length;//地址的总长度
-		var n2=loc.indexOf("?");//取得=号的位置
-		var text=loc.substr(n2+1, n1);//从=号后面的内容
-		var text_a=text.split("&");
-		var text_b=text_a.splice(1,2);
-		var id=text_a.toString();
-		var n3=id.indexOf("=");
-		var jobid=id.substr(n3+1,id.length);
-		var pwd=text_b.toString();
-		var n4=pwd.indexOf("=");
-		var password=pwd.substr(n4+1,pwd.length);
-		console.log(jobid);
-		console.log(password);
-		var urlnow = loc.substr(0,n2);
-		var jobId = jobid;
+<script type="text/javascript">
+    var totalPage;
+    var currPage;
+    var listPage;
+    var allPage;
+    var loc = location.href;
+    var n1 = loc.length;//地址的总长度
+    var n2 = loc.indexOf("?");//取得=号的位置
+    var text = loc.substr(n2 + 1, n1);//从=号后面的内容
+    var text_a = text.split("&");
+    var text_b = text_a.splice(1, 2);
+    var id = text_a.toString();
+    var n3 = id.indexOf("=");
+    var jobid = id.substr(n3 + 1, id.length);
+    var pwd = text_b.toString();
+    var n4 = pwd.indexOf("=");
+    var password = pwd.substr(n4 + 1, pwd.length);
+    console.log(jobid);
+    console.log(password);
+    var urlnow = loc.substr(0, n2);
+    var jobId = jobid;
 
-		$("#back_pool").click(function(){
-			location.href="index-funm.jsp?"+"                           jobId="+jobid+"&"+"                              password="+password;
-		});
-		$(function() {
-			showPage(1);
-		});
-		function showPage(n) {
-			$.ajax({
-				url : "${pagaContext.request.contextPath} funcs",
-				data : "pn=" + n,
-				type : "GET",
-				success : function(result) {
-					//显示数据
-					build_fun_table(result);
-					//显示分页信息
-					build_page_info_area(result);
-					//显示分页页面导航信息
-					build_page_nav_area(result);
-				}
-			});
-		}
+    $("#back_pool").click(function () {
+        location.href = "index-funm.jsp?" + "                           jobId=" + jobid + "&" + "                              password=" + password;
+    });
+    $(function () {
+        showPage(1);
+    });
 
-		function build_fun_table(result) {
-			$("#fun_table tbody").empty();
-			var funcs = result.data.page.list;
-			$
-					.each(
-							funcs,
-							function(index, item) {
-								var checkTd = $("<td><input type='checkbox' class='check_item'/></td>");
-								var j_idTd = $("<td></td>").append(item.jobId);
-								var nameTd = $("<td></td>").append(item.name);
-								var sexTd = $("<td></td>")
-										.append(item.sex);
-								var emailTd = $("<td></td>").append(item.email);
-								var phoneTd = $("<td></td>").append(item.phoneNum).addClass('phone_num');	
-								var birthTd = $("<td></td>").append(
-										new Date(item.birth)
-												.toLocaleDateString());
-								var entryTd = $("<td></td>").append(
-										new Date(item.entryTime)
-												.toLocaleDateString());
-								var d_nameTd = $("<td></td>").append(
-										item.depart.departName);
-								var stateTd = $("<td></td>").append(item.status);
-								var usageTd = $("<td></td>").append(item.usagee);
-								var editBtn = $("<button></button>")
-										.addClass(
-												"btn btn-primary btn-sm edit-btn")
-										.append(
-												$("<span></span>")
-														.addClass(
-																"glyphicon glyphicon-pencil"))
-										.append("编辑");
-								editBtn.attr("edit-funid", item.jobId);
-								var delBtn = $("<button></button>")
-										.addClass(
-												"btn btn-danger btn-sm delete-btn")
-										.append(
-												$("<span></span>")
-														.addClass(
-																"glyphicon glyphicon-trash"))
-										.append("删除");
-								delBtn.attr("delete-funid", item.jobId);
-								var editBtnTd = $("<td></td>").append(editBtn);
-								var delBtnTd = $("<td></td>").append(delBtn);
+    function showPage(n) {
+        $.ajax({
+            url: "${pagaContext.request.contextPath} funcs",
+            data: "pn=" + n,
+            type: "GET",
+            success: function (result) {
+                //显示数据
+                build_fun_table(result);
+                //显示分页信息
+                build_page_info_area(result);
+                //显示分页页面导航信息
+                build_page_nav_area(result);
+            }
+        });
+    }
 
-								$("<tr></tr>").append(checkTd).append(j_idTd)
-										.append(nameTd).append(sexTd).append(
-												emailTd).append(phoneTd)
-										.append(birthTd).append(entryTd)
-										.append(d_nameTd).append(stateTd).append(usageTd).append(editBtnTd)
-										.append(delBtnTd).appendTo(
-												"#fun_table tbody");
-								var trnum = $("#fun_table tbody").children("tr");
-							});
-		
-				var str = $(".phone_num").text();
-				var str1 = str.substring(0,10);
-				var str1_num = str1.substr(0,parseInt(str1.split('').length/2))+'****'+str1.substr(parseInt(str1.split('').length/2+4),str1.split('').length);
-				$(".phone_num").text(str1_num);
-		}
-		function build_page_info_area(result) {
-			$("#page_info_area").empty();
-			$("#page_info_area").append(
-					"当前第" + result.data.page.pageNum + "页/共"
-							+ result.data.page.pages + "页" + "，员工总数为"
-							+ result.data.page.total);
-			allPage = result.data.page.pages;
-			totalPage = result.data.page.total;
-			currPage = result.data.page.pageNum;
-			listPage = result.data.page.list;
-		}
-		function build_page_nav_area(result) {
-			$("#page_nav_area").empty();
-			var ul = $("<ul></ul>").addClass("pagination");
-			var firstPageLi = $("<li></li>").append(
-					$("<a></a>").append("首页").attr("href", "#"));
-			var previousPageLi = $("<li></li>").append(
-					$("<a></a>").append("&laquo;").attr("href", "#"));
-			if (result.data.page.hasPreviousPage == false) {
-				firstPageLi.addClass("disabled");
-				previousPageLi.addClass("disabled");
-			} else {
-				firstPageLi.click(function() {
-					showPage(1);
-				});
-				previousPageLi.click(function() {
-					showPage(result.data.page.pageNum - 1);
-				});
-			}
-			var nextPageLi = $("<li></li>").append(
-					$("<a></a>").append("&raquo;").attr("href", "#"));
-			var lastPageLi = $("<li></li>").append(
-					$("<a></a>").append("尾页").attr("href", "#"));
+    function build_fun_table(result) {
+        $("#fun_table tbody").empty();
+        var funcs = result.data.page.list;
+        $
+            .each(
+                funcs,
+                function (index, item) {
+                    var checkTd = $("<td><input type='checkbox' class='check_item'/></td>");
+                    var j_idTd = $("<td></td>").append(item.jobId);
+                    var nameTd = $("<td></td>").append(item.name);
+                    var sexTd = $("<td></td>")
+                        .append(item.sex);
+                    var emailTd = $("<td></td>").append(item.email);
+                    var phoneTd = $("<td></td>").append(item.phoneNum).addClass('phone_num' + index);
+                    var birthTd = $("<td></td>").append(
+                        new Date(item.birth)
+                            .toLocaleDateString());
+                    var entryTd = $("<td></td>").append(
+                        new Date(item.entryTime)
+                            .toLocaleDateString());
+                    var d_nameTd = $("<td></td>").append(
+                        item.depart.departName);
+                    var stateTd = $("<td></td>").append(item.status);
+                    var usageTd = $("<td></td>").append(item.usagee);
+                    var editBtn = $("<button></button>")
+                        .addClass(
+                            "btn btn-primary btn-sm edit-btn")
+                        .append(
+                            $("<span></span>")
+                                .addClass(
+                                    "glyphicon glyphicon-pencil"))
+                        .append("编辑");
+                    editBtn.attr("edit-funid", item.jobId);
+                    var delBtn = $("<button></button>")
+                        .addClass(
+                            "btn btn-warning btn-sm delete-btn")
+                        .append(
+                            $("<span></span>")
+                                .addClass(
+                                    "glyphicon glyphicon-trash"))
+                        .append("删除");
+                    delBtn.attr("delete-funid", item.jobId);
+                    delBtn.attr("delete-funstatus", item.status);
+                    delBtn.attr("delete-funusagee", item.usagee);
+                    var editBtnTd = $("<td></td>").append(editBtn);
+                    var delBtnTd = $("<td></td>").append(delBtn);
 
-			if (result.data.page.hasNextPage == false) {
-				nextPageLi.addClass("disabled");
-				lastPageLi.addClass("disabled");
-			} else {
-				nextPageLi.click(function() {
-					showPage(result.data.page.pageNum + 1);
-				});
-				lastPageLi.click(function() {
-					showPage(result.data.page.pages);
-				});
-			}
-			ul.append(firstPageLi).append(previousPageLi);
-			$.each(result.data.page.navigatepageNums, function(index, item) {
-				var numLi = $("<li></li>").append(
-						$("<a></a>").append(item).attr("href", "#"));
-				if (result.data.page.pageNum == item) {
-					numLi.addClass("active");
-				}
+                    $("<tr></tr>").append(checkTd).append(j_idTd)
+                        .append(nameTd).append(sexTd).append(
+                        emailTd).append(phoneTd)
+                        .append(birthTd).append(entryTd)
+                        .append(d_nameTd).append(stateTd).append(usageTd).append(editBtnTd)
+                        .append(delBtnTd).appendTo(
+                        "#fun_table tbody");
+                    var trnum = $("#fun_table tbody").children("tr");
+                });
+        var str1 = $(".phone_num0").text();
+        var str2 = $(".phone_num1").text();
+        var str3 = $(".phone_num2").text();
+        var str4 = $(".phone_num3").text();
+        var str5 = $(".phone_num4").text();
+        var str6 = $(".phone_num5").text();
+        var str7 = $(".phone_num6").text();
+        var str8 = $(".phone_num7").text();
+        var s1 = str1.substr(0, parseInt(str1.split('').length / 2)) + '****' + str1.substr(parseInt(str1.split('')
+            .length / 2 + 4), str1.split('').length);
+        $(".phone_num0").text(s1);
+        var s2 = str2.substr(0, parseInt(str2.split('').length / 2)) + '****' + str2.substr(parseInt(str2.split('')
+            .length / 2 + 4), str2.split('').length);
+        $(".phone_num1").text(s2);
+        var s3 = str3.substr(0, parseInt(str3.split('').length / 2)) + '****' + str3.substr(parseInt(str3.split('')
+            .length / 2 + 4), str3.split('').length);
+        $(".phone_num2").text(s3);
+        var s4 = str4.substr(0, parseInt(str4.split('').length / 2)) + '****' + str4.substr(parseInt(str4.split('')
+            .length / 2 + 4), str4.split('').length);
+        $(".phone_num3").text(s4);
+        var s5 = str5.substr(0, parseInt(str5.split('').length / 2)) + '****' + str5.substr(parseInt(str5.split('')
+            .length / 2 + 4), str5.split('').length);
+        $(".phone_num4").text(s5);
+        var s6 = str6.substr(0, parseInt(str6.split('').length / 2)) + '****' + str6.substr(parseInt(str6.split('')
+            .length / 2 + 4), str6.split('').length);
+        $(".phone_num5").text(s6);
+        var s7 = str7.substr(0, parseInt(str7.split('').length / 2)) + '****' + str7.substr(parseInt(str7.split('')
+            .length / 2 + 4), str7.split('').length);
+        $(".phone_num6").text(s7);
+        var s8 = str8.substr(0, parseInt(str8.split('').length / 2)) + '****' + str8.substr(parseInt(str8.split('')
+            .length / 2 + 4), str8.split('').length);
+        $(".phone_num7").text(s8);
 
-				numLi.click(function() {
-					showPage(item);
-				});
+    }
 
-				ul.append(numLi);
-			});
-			ul.append(nextPageLi).append(lastPageLi);
-			var navElement = $("<nav></nav>").append(ul).appendTo(
-					"#page_nav_area");
-		}
-		//新增
-		$("#fun_add_modal_btn").click(
-				function() {
-					//0.还原表单状态 
-					$(".form-control").val("");
-					$("#funAddModal").find("*").removeClass(
-							"has-error has-success has-warning");
-					//清除提示信息
-					$("#funAddModal").find(".help-block").text("");
-					//1.获取所有专业
-					getDeparts("#funAddModal select");
-					//2.显示模态框 
-					$('#funAddModal').modal({
-						keyboard : "static"
-					});
-				});
-		//查看
-		$("#fun_sel_modal_btn").click(
-				function() {
-					$(".form-control").val("");
-					$("#funSelModal").find("*").removeClass(
-							"has-error has-success has-warning");
-					//清除提示信息
-					$("#funSelModal").find(".help-block").text("");
-					//显示模态框
-					getDeparts("#funSelModal select");
-					$('#funSelModal').modal({
-						keyboard : "static"
-					});
-				});
-		$("#fun_sel_btn").click(
-				function() {
-					$("#funSelModal").find("*").removeClass(
-							"has-error has-success has-warning");
-					//清除提示信息
-					$("#funSelModal").find(".help-block").text("");
-					var jobId = $("#id_input").val();
-					$.ajax({
-						url : "${pagaContext.request.contextPath} funs/"
-								+ jobId,
-						type : "GET",
-						success : function(result) {
-							if (result.data.functionary != null) {
-								if (result.code == 101) {
-									var functionary = result.data.functionary;
-									var jobId = functionary.jobId;
-									$("#name_input_s").val(functionary.name);
-									$("#email_input_s").val(functionary.email);
-									$("#phone_input_s").val(
-											functionary.phoneNum);
-									$("#birth_input_s").val(
-											new Date(functionary.birth)
-													.toLocaleDateString());
-									$("#entry_input_s").val(
-											new Date(functionary.entryTime)
-													.toLocaleDateString());
-									$("#funSelModal input[name=sex]").val(
-											[ functionary.sex ]);
-									$("#funSelModal select").val(
-											[ functionary.departmentId ]);
-									show_validate_status("#id_input",
-											"success", "查找成功，该员工信息如下。");
-								}
-							} else {
-								show_validate_status("#id_input", "error",
-										"没有这个员工，请重新输入正确工号。");
-								$(".form-control").val("");
-							}
-						}
-					});
-				})
+    function build_page_info_area(result) {
+        $("#page_info_area").empty();
+        $("#page_info_area").append(
+            "当前第" + result.data.page.pageNum + "页/共"
+            + result.data.page.pages + "页" + "，员工总数为"
+            + result.data.page.total);
+        allPage = result.data.page.pages;
+        totalPage = result.data.page.total;
+        currPage = result.data.page.pageNum;
+        listPage = result.data.page.list;
+    }
 
-		//修改
-		$(document).on(
-				"click",
-				".edit-btn",
-				function() {
-					getDeparts("#funUpdateModal select");
-					getFun($(this).attr("edit-funid"));
-					$("#fun_update_btn").attr("edit-funid",
-							$(this).attr("edit-funid"));
-					$("#funUpdateModal").modal({
-						keyboard : "static"
-					});
-				});
-		//删除
-		$(document).on(
-				"click",
-				".delete-btn",
-				function() {
-					var funName = $(this).parent().parent().find("td:eq(2)")
-							.text();
-					if (confirm("确定要删除" + funName + "吗？")) {
-						$.ajax({
-							url : "${pagaContext.request.contextPath} func/"
-									+ $(this).attr("delete-funid"),
-							type : "DELETE",
-							success : function(result) {
-								alert(result.msg);
-								showPage(currPage);
-							}
-						});
-					}
-				});
+    function build_page_nav_area(result) {
+        $("#page_nav_area").empty();
+        var ul = $("<ul></ul>").addClass("pagination");
+        var firstPageLi = $("<li></li>").append(
+            $("<a></a>").append("首页").attr("href", "#"));
+        var previousPageLi = $("<li></li>").append(
+            $("<a></a>").append("&laquo;").attr("href", "#"));
+        if (result.data.page.hasPreviousPage == false) {
+            firstPageLi.addClass("disabled");
+            previousPageLi.addClass("disabled");
+        } else {
+            firstPageLi.click(function () {
+                showPage(1);
+            });
+            previousPageLi.click(function () {
+                showPage(result.data.page.pageNum - 1);
+            });
+        }
+        var nextPageLi = $("<li></li>").append(
+            $("<a></a>").append("&raquo;").attr("href", "#"));
+        var lastPageLi = $("<li></li>").append(
+            $("<a></a>").append("尾页").attr("href", "#"));
 
-		//获取学生信息
-		function getFun(jobId) {
-			$.ajax({
-				url : "${pagaContext.request.contextPath} funcc/" + jobId,
-				type : "GET",
-				success : function(result) {
-					if (result.code == 101) {
-						var functionary = result.data.functionary;
-						$("#name_input").val(functionary.name);
-						$("#email_input").val(functionary.email);
-						$("#phone_input").val(functionary.phoneNum);
-						$("#birth_input_up").val(
-								new Date(functionary.birth)
-										.toLocaleDateString());
-						$("#entry_input").val(
-								new Date(functionary.entryTime)
-										.toLocaleDateString());
-						$("#funUpdateModal input[name=sex]").val(
-								[ functionary.sex ]);
-						$("#funUpdateModal select").val(
-								[ functionary.departmentId ]);
-					}
-				}
-			});
-		}
+        if (result.data.page.hasNextPage == false) {
+            nextPageLi.addClass("disabled");
+            lastPageLi.addClass("disabled");
+        } else {
+            nextPageLi.click(function () {
+                showPage(result.data.page.pageNum + 1);
+            });
+            lastPageLi.click(function () {
+                showPage(result.data.page.pages);
+            });
+        }
+        ul.append(firstPageLi).append(previousPageLi);
+        $.each(result.data.page.navigatepageNums, function (index, item) {
+            var numLi = $("<li></li>").append(
+                $("<a></a>").append(item).attr("href", "#"));
+            if (result.data.page.pageNum == item) {
+                numLi.addClass("active");
+            }
 
-		//获取部门
-		function getDeparts(ele) {
-			$.ajax({
-				url : "${pagaContext.request.contextPath} departs",
-				type : "GET",
-				success : function(result) {
-					$(ele).empty();
-					$.each(result.data.departs, function() {
-						var optionElements = $("<option></option>").append(
-								this.departName).attr("value",
-								this.departmentId).appendTo(ele);
-					});
-				}
-			});
-		}
-		$("#fun_save_btn").click(
-				function() {
-					//1.对提交给服务器的数据进行规则校验
-					if (!validate_add_form()) {
-						return false;
-					}
-					//2.发送ajax请求，保存数据
-					$.ajax({
-						url : "${pagaContext.request.contextPath} func",
-						type : "POST",
-						data : $("#funAddModal form").serialize(),
-						success : function(result) {
-							if (result.code == 101) {
-								$("#funAddModal").modal('hide');
-								showPage(allPage);
-							} else {
-								if (result.data.errors.name != undefined) {
-									show_validate_status("#funName_input",
-											"error",
-											"姓名只能是多于2位的汉字和6~18位的字符，请重新输入。");
-								}
-								if (result.data.errors.email != undefined) {
-									show_validate_status("#email_update_input",
-											"error", "邮箱格式不正确，请重新输入。");
-								}
-								if (result.data.errors.phoneNum != undefined) {
-									show_validate_status("#phone_update_input",
-											"error", "电话号码格式不正确，请重新输入。");
-								}
-								if (result.data.errors.birth != undefined) {
-									show_validate_status("#birth_update_input",
-											"error", "日期格式不正确，请重新输入。");
-								}
-								if (result.data.errors.entryTime != undefined) {
-									show_validate_status("#entry_update_input",
-											"error", "日期格式不正确，请重新输入。");
-								}
-							}
-						}
-					});
-				});
-		function validate_add_form() {
-			var funName = $("#funName_input").val();
-			var regxName = /(^[a-zA-Z0-9_-]{6,16}$)|(^[\u2E80-\u9FFF]{2,20})/;
-			if (!regxName.test(funName)) {
-				//alert("姓名只能是大于2位的汉字或者6~18位的字符");
-				show_validate_status("#funName_input", "error",
-						"请输入姓名（姓名格式：大于2位的汉字或者6~18位的字符）");
-				return false;
-			} else {
-				show_validate_status("#funName_input", "success", "");
-			}
-			var funEmail = $("#email_update_input").val();
-			var regxEmail = /^[a-z\d]+(\.[a-z\d]+)*@([\da-z](-[\da-z])?)+(\.{1,2}[a-z]+)+$/;
-			if (!regxEmail.test(funEmail)) {
-				show_validate_status("#email_update_input", "error",
-						"请输入邮箱（邮箱格式：字符+@+字符+.+字符）");
-				return false;
-			} else {
-				show_validate_status("#email_update_input", "success", "");
-			}
-			var funPhone = $("#phone_update_input").val();
-			var regxPhone = /(^1[3|4|5|6|7|8|9][0-9]\d{4,8}$)/;
-			if (!regxPhone.test(funPhone)) {
-				show_validate_status("#phone_update_input", "error",
-						"请输入电话号码（电话号码格式：11位数字或0xx-xxxxxxxx）");
-				return false;
-			} else {
-				show_validate_status("#phone_update_input", "success", "");
-			}
-			var funBirth = $("#birth_update_input").val();
-			var regxBirth = /^(((?:19|20)\d\d)-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01]))$/;
-			if (!regxBirth.test(funBirth)) {
-				show_validate_status("#birth_update_input", "error",
-						"请输入出生日期（日期格式：1970-1-1/1970-01-01）");
-				return false;
-			} else {
-				show_validate_status("#birth_update_input", "success", "");
-			}
-			var funEntry = $("#entry_update_input").val();
-			var regxEntry = /^(((?:19|20)\d\d)-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01]))$/;
-			if (!regxEntry.test(funEntry)) {
-				show_validate_status("#entry_update_input", "error",
-						"请输入入职日期（日期格式：1970-1-1/1970-01-01）");
-				return false;
-			} else {
-				show_validate_status("#entry_update_input", "success", "");
-			}
-			return true;
-		}
-		function validate_update_form() {
-			var funName = $("#name_input").val();
-			var regxName = /(^[a-zA-Z0-9_-]{6,16}$)|(^[\u2E80-\u9FFF]{2,20})/;
-			if (!regxName.test(funName)) {
-				//alert("姓名只能是大于2位的汉字或者6~18位的字符");
-				show_validate_status("#name_input", "error",
-						"请输入姓名（姓名格式：大于2位的汉字或者6~18位的字符）");
-				return false;
-			} else {
-				show_validate_status("#name_input", "success", "");
-			}
-			var funEmail = $("#email_input").val();
-			var regxEmail = /^[a-z\d]+(\.[a-z\d]+)*@([\da-z](-[\da-z])?)+(\.{1,2}[a-z]+)+$/;
-			if (!regxEmail.test(funEmail)) {
-				show_validate_status("#email_input", "error",
-						"请输入邮箱（邮箱格式：字符+@+字符+.+字符）");
-				return false;
-			} else {
-				show_validate_status("#email_input", "success", "");
-			}
-			var funPhone = $("#phone_input").val();
-			var regxPhone = /(^1[3|4|5|6|7|8|9][0-9]\d{4,8}$)/;
-			if (!regxPhone.test(funPhone)) {
-				show_validate_status("#phone_input", "error",
-						"请输入电话号码（电话号码格式：11位数字或0xx-xxxxxxxx）");
-				return false;
-			} else {
-				show_validate_status("#phone_input", "success", "");
-			}
-			return true;
-		}
-		function show_validate_status(ele, status, msg) {
-			$(ele).parent().removeClass("has-error has-success has-warning");
-			if (status == "success") {
-				$(ele).parent().addClass("has-success");
-				$(ele).next("span").text(msg);
-			} else if (status == "error") {
-				$(ele).parent().addClass("has-error");
-				$(ele).next("span").text(msg);
-			} else if (status == "warning") {
-				$(ele).parent().addClass("has-warning");
-				$(ele).next("span").text(msg);
-			}
-		}
-		$("#funName_input").change(
-				function() {
-					var funName = this.value;
-					$.ajax({
-						url : "${pagaContext.request.contextPath} checkName",
-						type : "POST",
-						data : "funName=" + funName,
-						success : function(result) {
-							if (result.code == 101) {
-								show_validate_status("#funName_input",
-										"success", "姓名可用，未在库中出现重复。");
-							} else {
-								show_validate_status("#funName_input",
-										"warning", "姓名重复，检查是否确定同名。");
-							}
-						}
+            numLi.click(function () {
+                showPage(item);
+            });
 
-					});
-				});
-		$("#fun_update_btn").click(
-				function() {
-					//发送ajax请求  更新数据
-					if (!validate_update_form()) {
-						return false;
-					}
-					$.ajax({
-						url : "${pagaContext.request.contextPath} funccc/"
-								+ $(this).attr("edit-funid"),
-						type : "PUT",
-						data : $("#funUpdateModal form").serialize(),
-						success : function(result) {
-							if (result.code == 101) {
-								$("#funUpdateModal").modal('hide');
-								showPage(currPage);
-							} else {
-								if (result.data.errors.name != undefined) {
-									show_validate_status("#name_input",
-											"error",
-											"姓名只能是多于2位的汉字和6~18位的字符，请重新输入。");
-								}
-								if (result.data.errors.email != undefined) {
-									show_validate_status("#email_input",
-											"error", "邮箱格式不正确，请重新输入。");
-								}
-								if (result.data.errors.phoneNum != undefined) {
-									show_validate_status("#phone_input",
-											"error", "电话号码格式不正确，请重新输入。");
-								}
-								if (result.data.errors.birth != undefined) {
-									show_validate_status("#birth_input_up",
-											"error", "日期格式不正确，请重新输入。");
-								}
-								if (result.data.errors.entryTime != undefined) {
-									show_validate_status("#entry_input",
-											"error", "日期格式不正确，请重新输入。");
-								}
-							}
-						}
+            ul.append(numLi);
+        });
+        ul.append(nextPageLi).append(lastPageLi);
+        var navElement = $("<nav></nav>").append(ul).appendTo(
+            "#page_nav_area");
+    }
 
-					});
-				});
-		//全选
-		$("#check_All").click(function() {
-			//alert($(this).prop("checked"));
-			$(".check_item").prop("checked", $(this).prop("checked"));
-		});
-		$(document)
-				.on(
-						'click',
-						".check_item",
-						function() {
-							//alert($(".check_item").length);
-							//alert($(".check_item:checked").length);
-							var flag = $(".check_item:checked").length == $(".check_item").length;
-							$("#check_All").prop("checked", flag);
-						});
-		//批量删除
-		$("#fun_del_modal_btn").click(
-				function() {
-					var funNames = "";
-					var funJobids = "";
-					$.each($(".check_item:checked"), function() {
-						funNames += $(this).parents("tr").find("td:eq(2)")
-								.text()
-								+ ",";
-						funJobids += $(this).parents("tr").find("td:eq(1)")
-								.text()
-								+ ",";
-					})
+    //新增
+    $("#fun_add_modal_btn").click(
+        function () {
+            //0.还原表单状态
+            $(".form-control").val("");
+            $("#funAddModal").find("*").removeClass(
+                "has-error has-success has-warning");
+            //清除提示信息
+            $("#funAddModal").find(".help-block").text("");
+            //1.获取所有专业
+            getDeparts("#funAddModal select");
+            //2.显示模态框
+            $('#funAddModal').modal({
+                keyboard: "static"
+            });
+        });
 
-					funNames = funNames.substring(0, funNames.length - 1);
-					funJobids = funJobids.substring(0, funJobids.length - 1);
+    //文件批量导入
+    $("#up_file").click().change(function () {
+        var file_name;
+        $.ajax({
+            type: "POST",
+            url: "${pagaContext.request.contextPath} import" ,
+            enctype: "multipart/form-data",
+            data: new FormData($("#form")[0]),
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (msg) {
+                alert("批量导入成功！");
+                showPage(allPage);
+            }
+        });
+    });
 
-					if (confirm("确定要删除" + funNames + "吗？")) {
-						$.ajax({
-							url : "${pagaContext.request.contextPath} func/"
-									+ funJobids,
-							type : "DELETE",
-							success : function(result) {
-								alert(result.msg);
-								showPage(currPage);
-							}
-						});
 
-					}
-				});
-	</script>
+    //查看
+    $("#fun_sel_modal_btn").click(
+        function () {
+            $(".form-control").val("");
+            $("#funSelModal").find("*").removeClass(
+                "has-error has-success has-warning");
+            //清除提示信息
+            $("#funSelModal").find(".help-block").text("");
+            //显示模态框
+            getDeparts("#funSelModal select");
+            $('#funSelModal').modal({
+                keyboard: "static"
+            });
+        });
+    $("#fun_sel_btn").click(
+        function () {
+            $("#funSelModal").find("*").removeClass(
+                "has-error has-success has-warning");
+            //清除提示信息
+            $("#funSelModal").find(".help-block").text("");
+            var jobId = $("#id_input").val();
+            $.ajax({
+                url: "${pagaContext.request.contextPath} funs/"
+                    + jobId,
+                type: "GET",
+                success: function (result) {
+                    if (result.data.functionary != null) {
+                        if (result.code == 101) {
+                            var functionary = result.data.functionary;
+                            var jobId = functionary.jobId;
+                            $("#name_input_s").val(functionary.name);
+                            $("#email_input_s").val(functionary.email);
+                            $("#phone_input_s").val(
+                                functionary.phoneNum);
+                            $("#birth_input_s").val(
+                                new Date(functionary.birth)
+                                    .toLocaleDateString());
+                            $("#entry_input_s").val(
+                                new Date(functionary.entryTime)
+                                    .toLocaleDateString());
+                            $("#funSelModal input[name=sex]").val(
+                                [functionary.sex]);
+                            $("#funSelModal select").val(
+                                [functionary.departmentId]);
+                            show_validate_status("#id_input",
+                                "success", "查找成功，该员工信息如下。");
+                        }
+                    } else {
+                        show_validate_status("#id_input", "error",
+                            "没有这个员工，请重新输入正确工号。");
+                        $(".form-control").val("");
+                    }
+                }
+            });
+        })
+
+    //修改
+    $(document).on(
+        "click",
+        ".edit-btn",
+        function () {
+            getDeparts("#funUpdateModal select");
+            getFun($(this).attr("edit-funid"));
+            $("#fun_update_btn").attr("edit-funid",
+                $(this).attr("edit-funid"));
+            $("#funUpdateModal").modal({
+                keyboard: "static"
+            });
+        });
+    //删除
+    $(document).on(
+        "click",
+        ".delete-btn",
+        function () {
+            var funName = $(this).parent().parent().find("td:eq(2)")
+                .text();
+            if (confirm("确定要删除" + funName + "吗？")) {
+                $.ajax({
+                    url: "${pagaContext.request.contextPath} funccc/"
+                        + $(this).attr("delete-funid"),
+                    type: "PUT",
+                    data: {'status': 0, 'usagee': 0},
+                    success: function (result) {
+                        //alert(result.msg);
+                        showPage(currPage);
+                    }
+                });
+            }
+        });
+
+    //获取学生信息
+    function getFun(jobId) {
+        $.ajax({
+            url: "${pagaContext.request.contextPath} funs/" + jobId,
+            type: "GET",
+            success: function (result) {
+                if (result.code == 101) {
+                    var functionary = result.data.functionary;
+                    $("#name_input").val(functionary.name);
+                    $("#email_input").val(functionary.email);
+                    $("#phone_input").val(functionary.phoneNum);
+                    $("#birth_input_up").val(
+                        new Date(functionary.birth)
+                            .toLocaleDateString());
+                    $("#entry_input").val(
+                        new Date(functionary.entryTime)
+                            .toLocaleDateString());
+                    $("#funUpdateModal input[name=sex]").val(
+                        [functionary.sex]);
+                    $("#funUpdateModal select").val(
+                        [functionary.departmentId]);
+                }
+            }
+        });
+    }
+
+    //获取部门
+    function getDeparts(ele) {
+        $.ajax({
+            url: "${pagaContext.request.contextPath} departs",
+            type: "GET",
+            success: function (result) {
+                $(ele).empty();
+                $.each(result.data.departs, function () {
+                    var optionElements = $("<option></option>").append(
+                        this.departName).attr("value",
+                        this.departmentId).appendTo(ele);
+                });
+            }
+        });
+    }
+
+    $("#fun_save_btn").click(
+        function () {
+            //1.对提交给服务器的数据进行规则校验
+            if (!validate_add_form()) {
+                return false;
+            }
+            //2.发送ajax请求，保存数据
+            $.ajax({
+                url: "${pagaContext.request.contextPath} func",
+                type: "POST",
+                data: $("#funAddModal form").serialize(),
+                success: function (result) {
+                    if (result.code == 101) {
+                        $("#funAddModal").modal('hide');
+                        showPage(allPage);
+                    } else {
+                        if (result.data.errors.name != undefined) {
+                            show_validate_status("#funName_input",
+                                "error",
+                                "姓名只能是多于2位的汉字和6~18位的字符，请重新输入。");
+                        }
+                        if (result.data.errors.email != undefined) {
+                            show_validate_status("#email_update_input",
+                                "error", "邮箱格式不正确，请重新输入。");
+                        }
+                        if (result.data.errors.phoneNum != undefined) {
+                            show_validate_status("#phone_update_input",
+                                "error", "电话号码格式不正确，请重新输入。");
+                        }
+                        if (result.data.errors.birth != undefined) {
+                            show_validate_status("#birth_update_input",
+                                "error", "日期格式不正确，请重新输入。");
+                        }
+                        if (result.data.errors.entryTime != undefined) {
+                            show_validate_status("#entry_update_input",
+                                "error", "日期格式不正确，请重新输入。");
+                        }
+                    }
+                }
+            });
+        });
+
+    function validate_add_form() {
+        var funName = $("#funName_input").val();
+        var regxName = /(^[a-zA-Z0-9_-]{6,16}$)|(^[\u2E80-\u9FFF]{2,20})/;
+        if (!regxName.test(funName)) {
+            //alert("姓名只能是大于2位的汉字或者6~18位的字符");
+            show_validate_status("#funName_input", "error",
+                "请输入姓名（姓名格式：大于2位的汉字或者6~18位的字符）");
+            return false;
+        } else {
+            show_validate_status("#funName_input", "success", "");
+        }
+        var funEmail = $("#email_update_input").val();
+        var regxEmail = /^[a-z\d]+(\.[a-z\d]+)*@([\da-z](-[\da-z])?)+(\.{1,2}[a-z]+)+$/;
+        if (!regxEmail.test(funEmail)) {
+            show_validate_status("#email_update_input", "error",
+                "请输入邮箱（邮箱格式：字符+@+字符+.+字符）");
+            return false;
+        } else {
+            show_validate_status("#email_update_input", "success", "");
+        }
+        var funPhone = $("#phone_update_input").val();
+        var regxPhone = /(^1[3|4|5|6|7|8|9][0-9]\d{4,8}$)/;
+        if (!regxPhone.test(funPhone)) {
+            show_validate_status("#phone_update_input", "error",
+                "请输入电话号码（电话号码格式：11位数字或0xx-xxxxxxxx）");
+            return false;
+        } else {
+            show_validate_status("#phone_update_input", "success", "");
+        }
+        var funBirth = $("#birth_update_input").val();
+        var regxBirth = /^(((?:19|20)\d\d)-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01]))$/;
+        if (!regxBirth.test(funBirth)) {
+            show_validate_status("#birth_update_input", "error",
+                "请输入出生日期（日期格式：1970-1-1/1970-01-01）");
+            return false;
+        } else {
+            show_validate_status("#birth_update_input", "success", "");
+        }
+        var funEntry = $("#entry_update_input").val();
+        var regxEntry = /^(((?:19|20)\d\d)-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01]))$/;
+        if (!regxEntry.test(funEntry)) {
+            show_validate_status("#entry_update_input", "error",
+                "请输入入职日期（日期格式：1970-1-1/1970-01-01）");
+            return false;
+        } else {
+            show_validate_status("#entry_update_input", "success", "");
+        }
+        return true;
+    }
+
+    function validate_update_form() {
+        var funName = $("#name_input").val();
+        var regxName = /(^[a-zA-Z0-9_-]{6,16}$)|(^[\u2E80-\u9FFF]{2,20})/;
+        if (!regxName.test(funName)) {
+            //alert("姓名只能是大于2位的汉字或者6~18位的字符");
+            show_validate_status("#name_input", "error",
+                "请输入姓名（姓名格式：大于2位的汉字或者6~18位的字符）");
+            return false;
+        } else {
+            show_validate_status("#name_input", "success", "");
+        }
+        var funEmail = $("#email_input").val();
+        var regxEmail = /^[a-z\d]+(\.[a-z\d]+)*@([\da-z](-[\da-z])?)+(\.{1,2}[a-z]+)+$/;
+        if (!regxEmail.test(funEmail)) {
+            show_validate_status("#email_input", "error",
+                "请输入邮箱（邮箱格式：字符+@+字符+.+字符）");
+            return false;
+        } else {
+            show_validate_status("#email_input", "success", "");
+        }
+        var funPhone = $("#phone_input").val();
+        var regxPhone = /(^1[3|4|5|6|7|8|9][0-9]\d{4,8}$)/;
+        if (!regxPhone.test(funPhone)) {
+            show_validate_status("#phone_input", "error",
+                "请输入电话号码（电话号码格式：11位数字或0xx-xxxxxxxx）");
+            return false;
+        } else {
+            show_validate_status("#phone_input", "success", "");
+        }
+        return true;
+    }
+
+    function show_validate_status(ele, status, msg) {
+        $(ele).parent().removeClass("has-error has-success has-warning");
+        if (status == "success") {
+            $(ele).parent().addClass("has-success");
+            $(ele).next("span").text(msg);
+        } else if (status == "error") {
+            $(ele).parent().addClass("has-error");
+            $(ele).next("span").text(msg);
+        } else if (status == "warning") {
+            $(ele).parent().addClass("has-warning");
+            $(ele).next("span").text(msg);
+        }
+    }
+
+    $("#funName_input").change(
+        function () {
+            var funName = this.value;
+            $.ajax({
+                url: "${pagaContext.request.contextPath} checkName",
+                type: "POST",
+                data: "funName=" + funName,
+                success: function (result) {
+                    if (result.code == 101) {
+                        show_validate_status("#funName_input",
+                            "success", "姓名可用，未在库中出现重复。");
+                    } else {
+                        show_validate_status("#funName_input",
+                            "warning", "姓名重复，检查是否确定同名。");
+                    }
+                }
+
+            });
+        });
+    $("#fun_update_btn").click(
+        function () {
+            //发送ajax请求  更新数据
+
+            var phonenum = $("#phone_input").val();
+            console.log(phonenum)
+            $.ajax({
+                url: "${pagaContext.request.contextPath} funccc/"
+                    + $(this).attr("edit-funid"),
+                type: "PUT",
+                data: {"phoneNum": phonenum},
+                success: function (result) {
+                    if (result.code == 101) {
+                        $("#funUpdateModal").modal('hide');
+                        showPage(currPage);
+                    }
+                }
+
+            });
+        });
+    //全选
+    $("#check_All").click(function () {
+        //alert($(this).prop("checked"));
+        $(".check_item").prop("checked", $(this).prop("checked"));
+    });
+    $(document)
+        .on(
+            'click',
+            ".check_item",
+            function () {
+                //alert($(".check_item").length);
+                //alert($(".check_item:checked").length);
+                var flag = $(".check_item:checked").length == $(".check_item").length;
+                $("#check_All").prop("checked", flag);
+            });
+    //批量删除
+    $("#fun_del_modal_btn").click(
+        function () {
+            var funNames = "";
+            var funJobids = "";
+            $.each($(".check_item:checked"), function () {
+                funNames += $(this).parents("tr").find("td:eq(2)")
+                        .text()
+                    + ",";
+                funJobids += $(this).parents("tr").find("td:eq(1)")
+                        .text()
+                    + ",";
+            })
+
+            funNames = funNames.substring(0, funNames.length - 1);
+            funJobids = funJobids.substring(0, funJobids.length - 1);
+
+            if (confirm("确定要删除" + funNames + "吗？")) {
+                $.ajax({
+                    url: "${pagaContext.request.contextPath} func/"
+                        + funJobids,
+                    type: "DELETE",
+                    success: function (result) {
+                        alert(result.msg);
+                        showPage(currPage);
+                    }
+                });
+
+            }
+        });
+</script>
 </body>
 </html>

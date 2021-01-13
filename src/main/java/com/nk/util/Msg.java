@@ -24,6 +24,13 @@ public class Msg {
 		msg.setMsg("失败");
 		return msg;
 	}
+
+	public static Msg faillogin() {
+		Msg msg=new Msg();
+		msg.setCode(103);
+		msg.setMsg("无权限账号");
+		return msg;
+	}
 	
 	public int getCode() {
 		return code;

@@ -17,6 +17,7 @@ import java.util.List;
  */
 @Controller
 public class DepartHandler {
+
 	@Autowired
 	private DepartmentService departService;
 

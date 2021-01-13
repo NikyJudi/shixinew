@@ -59,7 +59,7 @@ public class FileController {
             PageInfo<Myfile> pageInfo = new PageInfo<>(myfiles, 5);
             return Msg.success().add("page", pageInfo);
         }
-        return Msg.success().add("myfiles", "列表为空");
+        return Msg.success().add("page", "列表为空");
     }
 
     /**
@@ -216,10 +216,10 @@ public class FileController {
      * @return
      * @throws IOException
      */
-    @DeleteMapping("/delete/{jobid}")
+    @DeleteMapping("/delete")
     @ResponseBody
     @Transactional
-    public Msg delete2(@PathVariable("jobid") Long jobid)  {
+    public Msg delete2(@RequestParam("jobid") Long jobid)  {
         return myFileService.deleteByFunId(jobid);
     }
 
@@ -250,7 +250,7 @@ public class FileController {
      * @param jobid
      * @return
      */
-    @PutMapping("/recover")
+    @PutMapping("/recover2")
     @ResponseBody
     public Msg recover2(@RequestParam("jobid") Long jobid){
         return myFileService.recover2(jobid);
@@ -266,7 +266,9 @@ public class FileController {
         List<Myfile> myfiles = myFileService.selectAllGarbage(jobid);
         if (Objects.nonNull(myfiles)) {
             PageInfo<Myfile> pageInfo = new PageInfo<>(myfiles, 5);
+            System.out.println(pageInfo);
             return Msg.success().add("page", pageInfo);
+
         }
         return Msg.success().add("message", "没有文件");
     }
@@ -306,4 +308,6 @@ public class FileController {
 //        }
 //        return Msg.fail().add("message", "无对应文件");
 //    }
+
+
 }

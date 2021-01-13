@@ -14,7 +14,7 @@ import java.util.Objects;
 /**
  * author: ningkun
  * date: 2021/01/05
- * 管理员操作
+ *
  */
 @Controller
 @RequestMapping("/admin")

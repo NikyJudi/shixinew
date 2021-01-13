@@ -9,8 +9,11 @@ import com.nk.entity.LoginEntity;
 import com.nk.service.FunctionaryService;
 import com.nk.util.Msg;
 import com.nk.util.Rename_String;
-import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.*;
+import org.apache.log4j.Logger;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,10 +25,9 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * author: ningkun
@@ -53,9 +55,11 @@ public class FunctionaryHandler {
         if (functionary == null) {
             return Msg.fail().add("message", "账号或密码错误");
         }
+        if (functionary.getStatus()==0 && functionary.getUsagee()==0){
+            return Msg.faillogin();
+        }
         session.setAttribute("user", functionary);
-        LOG.info(functionary);
-        return Msg.success().add("message", "登陆成功");
+        return Msg.success().add("functionary", functionary);
     }
 
 
@@ -111,7 +115,7 @@ public class FunctionaryHandler {
         }
         try {
             functionaryService.updateFunctionary(functionary);
-            return Msg.success();
+            return Msg.success().add("functionary", functionary);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             return Msg.fail().add("errors", e.getMessage());
@@ -212,5 +216,44 @@ public class FunctionaryHandler {
 //        }
 //        mfile.transferTo();
 //    }
+@PostMapping("/import")
+@ResponseBody
+public Msg importFun(@RequestParam("up_file") MultipartFile mfile) {
+    if (mfile.isEmpty()) {
+        return Msg.fail().add("message", "请选择非空文件!");
+    }
+    if (!"xls".equals(Rename_String.type(mfile.getOriginalFilename()))) {
+        return Msg.fail().add("message", "请选择xls文件!");
 
+    }
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    try {
+        HSSFWorkbook workbook = new HSSFWorkbook(mfile.getInputStream());
+        HSSFSheet sheet = workbook.getSheetAt(0);
+        if (sheet != null) {
+            HSSFRow row;
+            for (int i = 1, len = sheet.getLastRowNum(); i <= len; i++) {
+                Functionary functionary = new Functionary();
+                row = sheet.getRow(i);
+                if (row != null) {
+                    int j = 0;
+                    functionary.setName(row.getCell(j++).getStringCellValue());
+                    functionary.setSex(row.getCell(j++).getStringCellValue());
+                    functionary.setEmail(row.getCell(j++).getStringCellValue());
+                    DecimalFormat df = new DecimalFormat("#");
+                    functionary.setPhoneNum(df.format(row.getCell(j++).getNumericCellValue()));
+                    Date date1 = row.getCell(j++).getDateCellValue();
+                    Date date2 = row.getCell(j++).getDateCellValue();
+                    functionary.setBirth(simpleDateFormat.parse(simpleDateFormat.format(new Date(date1.getTime()))));
+                    functionary.setEntryTime(simpleDateFormat.parse(simpleDateFormat.format(new Date(date2.getTime()))));
+                    functionary.setDepartmentId((int) row.getCell(j).getNumericCellValue());
+                    functionaryService.saveFunctionary(functionary);
+                }
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return Msg.success().add("message","插入成功");
+}
 }

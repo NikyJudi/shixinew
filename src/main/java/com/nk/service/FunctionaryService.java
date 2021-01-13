@@ -33,7 +33,7 @@ public class FunctionaryService {
 		long count = functionaryMapper.countByExample(functionaryExample);
 		return count == 0;
 	}
-	//����
+
 	public void saveFunctionary(Functionary functionary) {
 		String pw = functionary.getDepartmentId() + ChineseCharToEn.getAllFirstLetter(functionary.getName());
 		pw += functionary.getPhoneNum();

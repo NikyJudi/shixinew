@@ -25,14 +25,10 @@
         </association>
     </resultMap>
     <sql id="Base_Column_List">
-        id
-        , fname, url, cdate, fsize, ftype, funid, deletestatus
+        id, fname, url, cdate, fsize, ftype, funid, deletestatus
     </sql>
     <sql id="Base_Column_List2">
-        m
-        .
-        id
-        , m.fname, m.url, m.cdate, m.fsize, m.ftype,m.deletestatus,m.funid
+        m.id, m.fname, m.url, m.cdate, m.fsize, m.ftype,m.deletestatus,m.funid
     </sql>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
@@ -170,8 +166,15 @@
            or f.name like concat('%', #{key, jdbcType = VARCHAR}, '%')
             and m.funid = #{id, jdbcType=BIGINT}
     </select>
-    <select id="selectAllGarbage" resultType="com.nk.entity.Myfile">
-        select <include refid="Base_Column_List2"/>, f.name
+    <select id="selectAllGarbage" resultMap="WithFunResultMap">
+        select m.id,
+               m.fname,
+               m.url,
+               m.cdate,
+               m.fsize,
+               m.ftype,
+               m.deletestatus,
+               f.name
         from myfile m left join functionary f on f.Job_id = m.funid
         where m.funid = #{jobid, jdbcType=BIGINT} and m.deletestatus=1
     </select>
