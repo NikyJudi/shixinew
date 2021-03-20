@@ -136,16 +136,11 @@ public class FunctionaryHandler {
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            System.out.println();
             return Msg.fail().add("errors", e.getStackTrace());
         }
     }
 
-    //	@InitBinder
-//	public void initBinder(WebDataBinder binder) {
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//		dateFormat.setLenient(false);
-//		binder.registerCustomEditor(Date.class,new CustomDateEditor(dateFormat, true));
-//	}
     @ResponseBody
     @RequestMapping("/funcs")
     public Msg getfuncWithJson(@RequestParam(value = "pn", defaultValue = "1") Integer pageNum) {
@@ -155,67 +150,6 @@ public class FunctionaryHandler {
         return Msg.success().add("page", pageInfo);
     }
 
-//    @PostMapping("/import")
-//    @ResponseBody
-//    public Msg importFun(@RequestParam("up_file") MultipartFile mfile) {
-//        if (mfile.isEmpty()) {
-//            return Msg.fail().add("message", "请选择非空文件!");
-//        }
-//        if (!"xls".equals(Rename_String.type(mfile.getOriginalFilename()))) {
-//            return Msg.fail().add("message", "请选择xls文件!");
-//
-//        }
-//        File file = new File("/temp.xls");
-//		JSONArray jarr = new JSONArray();
-//        try {
-//            HSSFWorkbook workbook = new HSSFWorkbook(mfile.getInputStream());
-//            HSSFSheet sheet = workbook.getSheetAt(0);
-//			int cols = 0;
-//            if (sheet != null) {
-//                HSSFRow row = sheet.getRow(0);
-//                if (row != null)
-//                    cols = row.getLastCellNum();
-//
-//                for (int i = 1, len = sheet.getLastRowNum(); i <= len; i++) {
-//                    row = sheet.getRow(i);
-//                    Functionary functionary =
-//                    if (row != null) {
-//                        JSONObject jo = new JSONObject();
-//                        for (int j = 0; j < cols; j++) {
-//                            HSSFCell cell = row.getCell(j);
-//                            if (cell != null) {
-//                                Object v = null;
-//                                HSSFCellStyle type = cell.getCellStyle();
-//                                switch (cell.getCellType()) {
-//                                    case HSSFCell.CELL_TYPE_NUMERIC:
-//                                        v = cell.getNumericCellValue();
-//                                        break;
-//                                    case HSSFCell.CELL_TYPE_STRING:
-//                                        v = cell.getStringCellValue();
-//                                        break;
-//                                    case HSSFCell.CELL_TYPE_BOOLEAN:
-//                                        v = cell.getBooleanCellValue();
-//                                        break;
-//                                    case HSSFCell.CELL_TYPE_FORMULA:
-//                                        v = cell.getCellFormula();
-//                                        break;
-//                                    default:
-//                                        System.out.println("unsuported sell type");
-//                                        break;
-//                                }
-//                                jo.put(fields[j], v);
-//
-//                            }
-//                        }
-//                        jarr.add(jo);
-//                    }
-//                }
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        mfile.transferTo();
-//    }
 @PostMapping("/import")
 @ResponseBody
 public Msg importFun(@RequestParam("up_file") MultipartFile mfile) {
